@@ -15,7 +15,14 @@
 				<c:url value='/' var='detailURL'>
 					<c:param name='id' value="${genre.id}" />
 				</c:url>
-				<li><a href="<c:out value='${detailURL}'/>">${genre.naam}</a></li>
+				<li><c:choose>
+						<c:when test="${genre.id == param.id}">
+							${genre.naam}
+						</c:when>
+						<c:otherwise>
+							<a href="<c:out value='${detailURL}'/>">${genre.naam}</a>
+						</c:otherwise>
+					</c:choose></li>
 			</c:forEach>
 		</ul>
 	</nav>

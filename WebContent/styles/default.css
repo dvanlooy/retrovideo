@@ -1,5 +1,9 @@
+body {
+	font-family: Garamond, Times New Roman;
+}
+
 nav ul {
-	background-color: red;
+	background-color: silver;
 	padding: 0.4em 0;
 }
 
@@ -16,5 +20,5 @@ nav li a {
 }
 
 nav li a:hover {
-	color: #F7FFCC;
+	color: grey;
 }
