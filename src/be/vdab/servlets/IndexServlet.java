@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import be.vdab.dao.RetrovideoDAO;
+import be.vdab.entities.Film;
 import be.vdab.entities.Genre;
 
 @WebServlet("/index.htm")
@@ -37,14 +38,16 @@ public class IndexServlet extends HttpServlet {
 		request.setAttribute("genres", genres);
 
 		// FIND FILMS ON SELECTED GENRE
-		long selectedGenre = 0;
+//		long selectedGenre = 0L;
+		if (request.getParameter("id") != null){
 		try {
-			selectedGenre = Long.parseLong(request.getParameter("id"));
-
-		} catch (Exception ex) {
+			long selectedGenre = Long.parseLong(request.getParameter("id"));
+			List<Film> films = retrovideoDAO.findFilmByGenre(selectedGenre);
+			request.setAttribute("films", films);
+		} catch (NumberFormatException ex) {
 			request.setAttribute("fout", "Nummer niet correct");
 		}
-		
+		}		
 		
 		
 		//GET ON WITH IT

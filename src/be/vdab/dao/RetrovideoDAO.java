@@ -49,7 +49,7 @@ public class RetrovideoDAO extends AbstractDAO {
 				return films;
 			}
 		} catch (SQLException ex) {
-			logger.log(Level.SEVERE, "Probleem met database pizzaluigi", ex);
+			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
 			throw new DAOException(ex);
 		}
 	}

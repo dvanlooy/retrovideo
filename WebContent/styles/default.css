@@ -9,16 +9,17 @@ nav ul {
 
 nav li {
 	display: inline;
-}
-
-nav li a {
-	color: white;
-	font-weight: bold;
 	padding-left: 0.5em;
 	text-decoration: none;
 	vertical-align: middle;
 }
 
+nav li a {
+	color: white;
+	text-decoration: none;
+}
+
 nav li a:hover {
 	color: grey;
+	text-decoration: none;
 }
