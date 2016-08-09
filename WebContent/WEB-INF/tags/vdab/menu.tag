@@ -1,5 +1,5 @@
 <%@tag description='menu' pageEncoding='UTF-8'%>
-<%@attribute name='current' required='true' type='java.lang.String'%>
+<%@attribute name='current' type='java.lang.String'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <section >
 	<nav id="top">

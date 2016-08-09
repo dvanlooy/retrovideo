@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	id="WebApp_ID" version="3.1">
-	<context-param>
-		<param-name>copyright</param-name>
-		<param-value>Dimitri Van Looy</param-value>
-	</context-param>
-	<session-config>
-		<session-timeout>20</session-timeout>
-		<tracking-mode>COOKIE</tracking-mode>
-	</session-config>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/WEB-INF/JSP/404.jsp</location>
-	</error-page>
-	<error-page>
-		<exception-type>be.vdab.dao.DAOException</exception-type>
-		<location>/WEB-INF/JSP/daoexception.jsp</location>
-	</error-page>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <context-param>
+    <param-name>copyright</param-name>
+    <param-value>Dimitri Van Looy</param-value>
+  </context-param>
+  <session-config>
+    <session-timeout>20</session-timeout>
+    <tracking-mode>COOKIE</tracking-mode>
+  </session-config>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/JSP/404.jsp</location>
+  </error-page>
+  <error-page>
+    <exception-type>be.vdab.dao.DAOException</exception-type>
+    <location>/WEB-INF/JSP/daoexception.jsp</location>
+  </error-page>
 </web-app>

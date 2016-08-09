@@ -1,4 +1,4 @@
-<%@page contentType='text/html' pageEncoding='UTF-8' session='false' trimDirectiveWhitespaces ='true'%>
+<%@page contentType='text/html' pageEncoding='UTF-8' trimDirectiveWhitespaces ='true'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <title>${param.title}</title>
 <meta name='viewport' content='width=device-width,initial-scale=1'>
