@@ -1,5 +1,6 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix='vdab' uri='http://vdab.be/tags'%>
 <!doctype html>
 <html lang='nl'>
 <head>
@@ -8,11 +9,13 @@
 </c:import>
 </head>
 <body>
+<vdab:menu/>
+<div class="wrapper">
 	<h1>Reservaties</h1>
 	<nav class='genres'>
 		<ul>
 			<c:forEach var='genre' items='${genres}'>
-				<c:url value='/' var='genreURL'>
+				<c:url value='/index.htm' var='genreURL'>
 					<c:param name='id' value="${genre.id}" />
 				</c:url>
 				<li><c:choose>
@@ -58,6 +61,6 @@
 			</nav>
 		</c:otherwise>
 	</c:choose>
-
+</div>
 </body>
 </html>

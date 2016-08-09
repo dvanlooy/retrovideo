@@ -1,3 +1,47 @@
+/* NORMALIZE */
+html, body, div, section, article, aside, nav {
+	margin: 0;
+	padding: 0;
+}
+.wrapper {
+	margin: 10 10 10 10;
+}
+.center {
+	text-align: center;
+}
+
+.fill {
+	width: 100%;
+	margin: 0 auto;
+}
+/**** TOPMENU ****/
+#topmenu {
+	background-color: silver;
+	text-align: left;
+	font-color: #F5F5F5;
+}
+
+#topmenu ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#topmenu ul li {
+	display: inline;
+}
+
+#topmenu ul li a {
+	display: inline-block;
+	padding-right: 1em;
+	text-decoration: none;
+}
+
+#topmenu ul li a:hover {
+	color: grey;
+	text-decoration: none;
+}
+
 body {
 	font-family: Garamond, Times New Roman;
 	background-color: #F5F5F5;
@@ -8,13 +52,12 @@ a {
 	text-decoration: none;
 }
 
-a:hover{
+a:hover {
 	color: black;
 	text-decoration: none;
 }
 
-ul{
-
+ul {
 	padding: 0.4em 0;
 }
 
@@ -39,7 +82,8 @@ nav li a:hover {
 	color: grey;
 	text-decoration: none;
 }
-dd,dt {
+
+dd, dt {
 	margin-left: 0;
 }
 
