@@ -37,12 +37,12 @@ public class MandjeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// RETRIEVE SET WITH ID's FROM SESSION
+		// RETRIEVE mandje WITH ID's FROM SESSION
 		@SuppressWarnings("unchecked")
 		Set<Long> mandje = (Set<Long>) request.getSession().getAttribute("mandje");
 
+		// CREATE LIST WITH FILM OBJECTS
 		if (mandje != null) {
-			// CREATE LIST WITH FILM OBJECTS
 			List<Film> filmsInMandje = new ArrayList<>();
 			for (long id : mandje) {
 				filmsInMandje.add(retrovideoDAO.findFilmById(id));
@@ -57,7 +57,7 @@ public class MandjeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// RETRIEVE SET WITH ID's FROM SESSION
+		// RETRIEVE mandje WITH ID's FROM SESSION
 		@SuppressWarnings("unchecked")
 		Set<Long> mandje = (Set<Long>) request.getSession().getAttribute("mandje");
 
@@ -74,16 +74,19 @@ public class MandjeServlet extends HttpServlet {
 			}
 		}
 
-		// CHECK IF ID's NEED TO BE REMOVED FROM mandje; WHEN NO FILMS IN mandje, REMOVE SESSION ATTRIBUTE mandje
+		// CHECK IF ID's NEED TO BE REMOVED FROM mandje; WHEN NO FILMS IN
+		// mandje, REMOVE SESSION ATTRIBUTE mandje
 		if (request.getParameterValues("remove") != null) {
 			for (String id : request.getParameterValues("remove")) {
 				mandje.remove(Long.parseLong(id));
 			}
-			if (mandje.isEmpty()) request.getSession().removeAttribute("mandje");
+			if (mandje.isEmpty())
+				request.getSession().removeAttribute("mandje");
 		}
-		
+
 		// PUT mandje IN SESSION IF NOT EMPTY
-		if (!mandje.isEmpty()) request.getSession().setAttribute("mandje", mandje);
+		if (!mandje.isEmpty())
+			request.getSession().setAttribute("mandje", mandje);
 
 		// GET ON WITH IT
 		response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath()));
