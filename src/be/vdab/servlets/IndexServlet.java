@@ -15,7 +15,7 @@ import be.vdab.dao.RetrovideoDAO;
 import be.vdab.entities.Genre;
 
 
-@WebServlet("/IndexServlet")
+@WebServlet("/index.htm")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
