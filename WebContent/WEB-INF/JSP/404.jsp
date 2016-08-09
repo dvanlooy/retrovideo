@@ -9,7 +9,7 @@
 </c:import>
 </head>
 <body>
-	<vdab:menu />
+	<vdab:menu current='Grijze zone'/>
 	<div class="center">
 		<img src="<c:url value='/images/404-gentlemen.jpg'/>" alt="404-ERROR">
 	</div>

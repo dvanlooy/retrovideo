@@ -9,7 +9,7 @@
 </c:import>
 </head>
 <body>
-<vdab:menu/>
+<vdab:menu current='Overzicht Genres'/>
 <div class="wrapper">
 	<h1>Reservaties</h1>
 	<nav class='genres'>
@@ -20,7 +20,7 @@
 				</c:url>
 				<li><c:choose>
 						<c:when test='${param.id == genre.id.toString()}'>
-							${genre.naam}
+							<span class="activemenuitem">${genre.naam}</span>
 						</c:when>
 						<c:otherwise>
 							<a href="<c:out value='${genreURL}'/>">${genre.naam}</a>

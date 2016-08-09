@@ -3,9 +3,7 @@ html, body, div, section, article, aside, nav {
 	margin: 0;
 	padding: 0;
 }
-.wrapper {
-	margin: 10 10 10 10;
-}
+
 .center {
 	text-align: center;
 }
@@ -14,37 +12,52 @@ html, body, div, section, article, aside, nav {
 	width: 100%;
 	margin: 0 auto;
 }
-/**** TOPMENU ****/
-#topmenu {
-	background-color: silver;
-	text-align: left;
-	font-color: #F5F5F5;
-}
+/**** TOP ****/
 
-#topmenu ul {
+#top ul {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 }
 
-#topmenu ul li {
+#top ul li {
+	float: left;
 	display: inline;
+	color: white;
+	border-right: 1px solid #bbb;
 }
 
-#topmenu ul li a {
-	display: inline-block;
-	padding-right: 1em;
+#top ul li:last-child {
+	border-right: none;
+}
+
+#top ul li a {
+	color: white;
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
 	text-decoration: none;
 }
 
-#topmenu ul li a:hover {
-	color: grey;
-	text-decoration: none;
+#top ul li a:hover {
+	background-color: #4CAF50;
+}
+
+#top .right {
+	float: right;
+	padding: 14px 16px;
+	
+}
+
+.wrapper {
+	padding: 10px;
 }
 
 body {
 	font-family: Garamond, Times New Roman;
-	background-color: #F5F5F5;
+	background-color: #f0f0f0;
 }
 
 a {
@@ -60,27 +73,39 @@ a:hover {
 ul {
 	padding: 0.4em 0;
 }
+ul li {
+	display: inline;
+}
 
 .genres ul {
-	background-color: silver;
-	padding: 0.4em 0;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 }
 
-nav li {
+.genres ul li {
+	float: left;
 	display: inline;
-	padding-left: 0.5em;
-	text-decoration: none;
-	vertical-align: middle;
-}
-
-nav li a {
 	color: white;
+}
+
+.genres ul li a {
+	color: white;
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
 	text-decoration: none;
 }
 
-nav li a:hover {
-	color: grey;
-	text-decoration: none;
+.genres ul li a:hover {
+	background-color: #111;
+}
+.activemenuitem{
+	display: block;
+	background-color: #4CAF50;
+	padding: 14px 16px;
 }
 
 dd, dt {

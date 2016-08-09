@@ -19,34 +19,36 @@
 			document.getElementById("knopinmandje").disabled = true;
 		};
 	</script>
-<vdab:menu/>
-	<c:choose>
-		<c:when test='${not empty fout}'>
-			<div class='fout'>${fout}</div>
-		</c:when>
-		<c:otherwise>
+	<vdab:menu current='Detail Film'/>
+	<div class="wrapper">
+		<c:choose>
+			<c:when test='${not empty fout}'>
+				<div class='fout'>${fout}</div>
+			</c:when>
+			<c:otherwise>
 
 
 
-			<h1>${film.titel}</h1>
-			<img src=<c:url value='/images/${film.id}.jpg'/> alt='${film.titel}'
-				title='${film.titel}: ${beschikbaarheid}'>
-			<dl>
-				<dt>Prijs</dt>
-				<dd>€ ${film.prijs}</dd>
-				<dt>Voorraad</dt>
-				<dd>${film.voorraad}</dd>
-				<dt>Gereserveerd</dt>
-				<dd>${film.gereserveerd}</dd>
-				<dt>Beschikbaar</dt>
-				<dd>${beschikbaar}</dd>
-			</dl>
-			<form method="post" action="<c:url value="/mandje.htm" />" id="form">
-				<input name="id" value="${film.id}" hidden="true" /> <input
-					type="submit" value="In mandje" name="inmandje" id="knopinmandje"
-					<c:if test="${beschikbaar <= 0}">disabled="true"</c:if> />
-			</form>
-		</c:otherwise>
+				<h1>${film.titel}</h1>
+				<img src=<c:url value='/images/${film.id}.jpg'/> alt='${film.titel}'
+					title='${film.titel}: ${beschikbaarheid}'>
+				<dl>
+					<dt>Prijs</dt>
+					<dd>€ ${film.prijs}</dd>
+					<dt>Voorraad</dt>
+					<dd>${film.voorraad}</dd>
+					<dt>Gereserveerd</dt>
+					<dd>${film.gereserveerd}</dd>
+					<dt>Beschikbaar</dt>
+					<dd>${beschikbaar}</dd>
+				</dl>
+				<form method="post" action="<c:url value="/mandje.htm" />" id="form">
+					<input name="id" value="${film.id}" hidden="true" /> <input
+						type="submit" value="In mandje" name="inmandje" id="knopinmandje"
+						<c:if test="${beschikbaar <= 0}">disabled="true"</c:if> />
+				</form>
+			</c:otherwise>
 		</c:choose>
+	</div>
 </body>
 </html>
