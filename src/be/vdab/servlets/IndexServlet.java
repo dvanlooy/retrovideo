@@ -45,7 +45,7 @@ public class IndexServlet extends HttpServlet {
 			List<Film> films = retrovideoDAO.findFilmsByGenre(selectedGenre);
 			request.setAttribute("films", films);
 		} catch (NumberFormatException ex) {
-			request.setAttribute("fout", "Nummer niet correct");
+			request.setAttribute("fout", "Genre id niet correct");
 		}
 		}		
 		

@@ -41,11 +41,9 @@ public class FilmDetailServlet extends HttpServlet {
 			request.setAttribute("beschikbaar", beschikbaar);
 			request.setAttribute("film", film);
 		} catch (NumberFormatException ex) {
-			request.setAttribute("fout", "Nummer niet correct");
+			request.setAttribute("fout", "Film id niet correct");
 		}
 		}	
-		
-		
 		
 		// GET ON WITH IT
 		request.getRequestDispatcher(VIEW).forward(request, response);
