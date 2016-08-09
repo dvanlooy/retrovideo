@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>Reservaties</h1>
-	<nav>
+	<nav class='genres'>
 		<ul>
 			<c:forEach var='genre' items='${genres}'>
 				<c:url value='/' var='genreURL'>
@@ -21,6 +21,7 @@
 						</c:when>
 						<c:otherwise>
 							<a href="<c:out value='${genreURL}'/>">${genre.naam}</a>
+
 						</c:otherwise>
 					</c:choose></li>
 			</c:forEach>
@@ -34,12 +35,27 @@
 			<div class='fout'>Geen films gevonden</div>
 		</c:when>
 		<c:otherwise>
-			<c:forEach var='film' items='${films}'>
-				<c:url value='/filmdetail.htm' var='filmdetailURL'>
-					<c:param name='id' value="${film.id}" />
-				</c:url>
-				<li><a href="<c:out value='${filmdetailURL}'/>">${film.titel}</a></li>
-			</c:forEach>
+			<nav>
+				<ul>
+					<c:forEach var='film' items='${films}'>
+						<c:choose>
+							<c:when test='${film.gereserveerd < film.voorraad}'>
+								<c:set var='beschikbaarheid' value="reservatie mogelijk" />
+							</c:when>
+							<c:when test='${film.gereserveerd == film.voorraad}'>
+								<c:set var='beschikbaarheid' value="reservatie niet mogelijk" />
+							</c:when>
+						</c:choose>
+						<c:url value='/filmdetail.htm' var='filmdetailURL'>
+							<c:param name='id' value="${film.id}" />
+						</c:url>
+						<li><a href="<c:out value='${filmdetailURL}'/>"> <img
+								src=<c:url value='/images/${film.id}.jpg'/> alt='${film.titel}'
+								title='${film.titel}: ${beschikbaarheid}'>
+						</a></li>
+					</c:forEach>
+				</ul>
+			</nav>
 		</c:otherwise>
 	</c:choose>
 

@@ -16,6 +16,7 @@ import be.vdab.entities.Genre;
 public class RetrovideoDAO extends AbstractDAO {
 	private static final String SELECT_GENRES = "SELECT * FROM genres ORDER BY naam";
 	private static final String SELECT_FILMS = "SELECT * FROM films INNER JOIN genres ON films.genreid = genres.id WHERE genreid = ? ORDER BY titel";
+	private static final String SELECT_ONE_FILM = "SELECT * FROM films INNER JOIN genres ON films.genreid = genres.id WHERE films.id = ?";
 	private final static Logger logger = Logger.getLogger(RetrovideoDAO.class.getName());
 
 	public List<Genre> findGenres() {
@@ -37,7 +38,7 @@ public class RetrovideoDAO extends AbstractDAO {
 		return new Genre(resultSet.getLong("id"), resultSet.getString("naam"));
 	}
 
-	public List<Film> findFilmByGenre(long id) {
+	public List<Film> findFilmsByGenre(long id) {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_FILMS)) {
 			List<Film> films = new ArrayList<>();
@@ -57,5 +58,21 @@ public class RetrovideoDAO extends AbstractDAO {
 		return new Film(resultSet.getLong("films.id"), new Genre(resultSet.getLong("genres.id"), 
 				resultSet.getString("naam")), resultSet.getString("titel"), resultSet.getInt("voorraad"), 
 				resultSet.getInt("gereserveerd"), resultSet.getBigDecimal("prijs"));
+	}
+	public Film findFilmById(long id) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_ONE_FILM)) {
+			statement.setLong(1, id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				Film film = null;
+				while (resultSet.next()) {
+					film = resultSetRijNaarFilm(resultSet);
+				}
+				return film;
+			}
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
+			throw new DAOException(ex);
+		}
 	}
 }

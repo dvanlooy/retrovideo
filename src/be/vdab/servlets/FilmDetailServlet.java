@@ -1,7 +1,6 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -13,50 +12,48 @@ import javax.sql.DataSource;
 
 import be.vdab.dao.RetrovideoDAO;
 import be.vdab.entities.Film;
-import be.vdab.entities.Genre;
 
-@WebServlet("/index.htm")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/filmdetail.htm")
+public class FilmDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
-	private static final String VIEW = "/WEB-INF/JSP/index.jsp";
+	private static final String VIEW = "/WEB-INF/JSP/filmdetail.jsp";
 
 	@Resource(name = RetrovideoDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
 		retrovideoDAO.setDataSource(dataSource);
 	}
 
-	public IndexServlet() {
+	public FilmDetailServlet() {
 		super();
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		// FIND GENRES (TO DISPLAY MENU)
-		List<Genre> genres = retrovideoDAO.findGenres();
-		request.setAttribute("genres", genres);
-
-		// FIND FILMS ON SELECTED GENRE
-//		long selectedGenre = 0L;
+		
+		// FIND FILM ON SELECTED ID
 		if (request.getParameter("id") != null){
 		try {
-			long selectedGenre = Long.parseLong(request.getParameter("id"));
-			List<Film> films = retrovideoDAO.findFilmsByGenre(selectedGenre);
-			request.setAttribute("films", films);
+			long selectedFilm = Long.parseLong(request.getParameter("id"));
+			Film film = retrovideoDAO.findFilmById(selectedFilm);
+			long beschikbaar = film.getVoorraad()-film.getGereserveerd();
+			request.setAttribute("beschikbaar", beschikbaar);
+			request.setAttribute("film", film);
 		} catch (NumberFormatException ex) {
 			request.setAttribute("fout", "Nummer niet correct");
 		}
-		}		
+		}	
 		
 		
-		//GET ON WITH IT
+		
+		// GET ON WITH IT
 		request.getRequestDispatcher(VIEW).forward(request, response);
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 
