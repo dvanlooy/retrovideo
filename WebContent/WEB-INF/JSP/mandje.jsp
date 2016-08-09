@@ -28,7 +28,7 @@
 								<tr>
 									<td>${film.titel}</td>
 									<td>&euro; ${film.prijs}</td>
-									<td><input type='checkbox' name='remove'
+									<td class="center"><input type='checkbox' name='remove'
 										value='${film.id}'></td>
 								</tr>
 							</c:forEach>
@@ -36,7 +36,7 @@
 					</table>
 				</form>
 			</c:when>
-			<c:otherwise>Geen films in het mandje</c:otherwise>
+			<c:otherwise>Het mandje is leeg</c:otherwise>
 		</c:choose>
 	</div>
 </body>

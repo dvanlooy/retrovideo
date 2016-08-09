@@ -40,7 +40,7 @@
 					<dd>${beschikbaar}</dd>
 				</dl>
 				<form method="post" action="<c:url value="/mandje.htm" />" id="form">
-					<input name="id" value="${film.id}" hidden="true" /> <input
+					<input name="add" value="${film.id}" hidden="true" /> <input
 						type="submit" value="In mandje" name="submit" id="knop"
 						<c:if test="${beschikbaar <= 0}">disabled="true"</c:if> />
 				</form>
