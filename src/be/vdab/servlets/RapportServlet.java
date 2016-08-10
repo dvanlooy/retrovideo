@@ -21,6 +21,7 @@ public class RapportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
 	private static final String VIEW = "/WEB-INF/JSP/rapport.jsp";
+	private static final String REDIRECT_URL = "%s/rapport.htm";
 
 	@Resource(name = RetrovideoDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
@@ -51,17 +52,20 @@ public class RapportServlet extends HttpServlet {
 		for (long filmid : mandje) {
 			if (retrovideoDAO.makeReservation(filmid, klantid)) {
 				reservaties.put(retrovideoDAO.findFilmById(filmid), true);
-			}else{
+			} else {
 				reservaties.put(retrovideoDAO.findFilmById(filmid), false);
 			}
 		}
-		if (!reservaties.values().contains(false)){
+		if (!reservaties.values().contains(false)) {
 			request.getSession().removeAttribute("mandje");
 			request.getSession().removeAttribute("klantid");
-			request.getSession().setAttribute("succes", "success");
-			
+			request.getSession().setAttribute("succes", "De Reservate is OK");
+
 		}
 		request.getSession().setAttribute("reservaties", reservaties);
+		
+		// GET ON WITH IT
+		response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath()));
 	}
 
 }
