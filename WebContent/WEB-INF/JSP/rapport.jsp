@@ -16,11 +16,6 @@
 		<c:choose>
 		<c:when test="${not empty succes}">
 		${succes}
-		<c:forEach var="reservatie" items="${reservaties}">
-		
-		${reservatie.key.titel}&nbsp;${reservatie.value}
-
-		</c:forEach>
 		</c:when>
 		<c:otherwise>
 		<p>De Reservatie is niet volledig gelukt.</p>
