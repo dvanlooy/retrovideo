@@ -22,6 +22,9 @@ public class RetrovideoDAO extends AbstractDAO {
 	private static final String SELECT_KLANTEN_FAMILIENAAM = "SELECT * FROM klanten WHERE familienaam LIKE ? ORDER BY familienaam ASC";
 	private static final String SELECT_KLANT = "SELECT * FROM klanten WHERE id = ?";
 	
+	private static final String INSERT_RESERVATIE = "INSERT INTO reservaties (klantid, filmid, reservatieDatum) VALUES (?, ? , {fn now()})";
+	private static final String UPDATE_FILM_GERESERVEERD = "UPDATE films SET gereserveerd = gereserveerd + 1 WHERE id = ? AND voorraad - gereserveerd > 0";
+	
 	private final static Logger logger = Logger.getLogger(RetrovideoDAO.class.getName());
 
 	
@@ -151,6 +154,12 @@ public class RetrovideoDAO extends AbstractDAO {
 				resultSet.getString("voornaam"), resultSet.getString("straatNummer"), 
 				resultSet.getString("postcode"), resultSet.getString("gemeente"));
 	}
+	
+	/**
+	 * Gets a Klant from database
+	 * @param id
+	 * @return Klant Object
+	 */
 	public Klant findKlantById(long id) {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_KLANT)) {
@@ -163,6 +172,35 @@ public class RetrovideoDAO extends AbstractDAO {
 				}
 				return klant;
 			}
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
+			throw new DAOException(ex);
+		}
+	}
+	
+	//METHODS FOR RESERVATIE
+	public boolean makeReservation (long filmid, long klantid){
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement_1 = connection.prepareStatement(UPDATE_FILM_GERESERVEERD);
+				PreparedStatement statement_2 = connection.prepareStatement(INSERT_RESERVATIE)) {
+			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+			connection.setAutoCommit(false);
+			
+			statement_1.setLong(1, filmid);
+			
+			statement_2.setLong(1, klantid);
+			statement_2.setLong(2, filmid);
+			
+			int filmsUpdated = statement_1.executeUpdate();
+			if (filmsUpdated == 1){
+				statement_2.executeUpdate();
+				connection.commit();
+				return true;
+			}else{
+				connection.rollback();
+				return false;
+			}
+
 		} catch (SQLException ex) {
 			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
 			throw new DAOException(ex);
