@@ -47,14 +47,15 @@ public class RapportServlet extends HttpServlet {
 		long klantid = (Long) request.getSession().getAttribute("klantid");
 
 		// PUT RESERVATIONS IN DATABASE
-		Map<Long, Boolean> reservaties = new HashMap<>();
+		Map<Film, Boolean> reservaties = new HashMap<>();
 		for (long filmid : mandje) {
 			if (retrovideoDAO.makeReservation(filmid, klantid)) {
-				reservaties.put(filmid, true);
+				reservaties.put(retrovideoDAO.findFilmById(filmid), true);
 			}else{
-				reservaties.put(filmid, false);
+				reservaties.put(retrovideoDAO.findFilmById(filmid), false);
 			}
 		}
+		
 
 	}
 
