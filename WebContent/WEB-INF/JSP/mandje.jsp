@@ -6,12 +6,13 @@
 <html lang='nl'>
 <head>
 <c:import url="/WEB-INF/JSP/head.jsp">
-	<c:param name="title" value="Retrovideo: Reservaties" />
+	<c:param name="title" value="Retrovideo: Mandje" />
 </c:import>
 </head>
 <body>
 	<vdab:menu current='Mandje' />
 	<div class="wrapper">
+		<h1>Mandje</h1>
 		<c:choose>
 			<c:when test='${not empty FilmsInMandje}'>
 				<form action="" method="post">
@@ -20,7 +21,7 @@
 							<tr>
 								<th>Film</th>
 								<th>Prijs</th>
-								<th><input type="submit" value="Verwijderen" />
+								<th><input type="submit" value="Verwijderen" class="verwijderenknop"/></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -36,7 +37,9 @@
 					</table>
 				</form>
 			</c:when>
-			<c:otherwise>Het mandje is leeg</c:otherwise>
+			<c:otherwise>
+			<img alt="Leeg Mandje" src="<c:url value='/images/leegmandje.png'/>">
+			</c:otherwise>
 		</c:choose>
 	</div>
 </body>

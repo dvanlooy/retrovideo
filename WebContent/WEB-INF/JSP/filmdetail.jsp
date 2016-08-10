@@ -6,19 +6,10 @@
 <html lang='nl'>
 <head>
 <c:import url="/WEB-INF/JSP/head.jsp">
-	<c:param name="title" value="Retrovideo: Reservaties" />
+	<c:param name="title" value="Retrovideo: Film Detail" />
 </c:import>
 </head>
 <body>
-	<script>
-		document.getElementById("form").onsubmit = function() {
-			if (!navigator.cookieEnabled) {
-				alert("Dit werkt enkel met cookies enabled");
-				return false;
-			}
-			document.getElementById("knop").disabled = true;
-		};
-	</script>
 	<vdab:menu current='Detail Film'/>
 	<div class="wrapper">
 		<c:choose>
