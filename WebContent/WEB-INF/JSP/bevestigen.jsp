@@ -15,13 +15,22 @@
 		<h1>Bevestigen</h1>
 		<c:choose>
 			<c:when test="${empty leeg}">
-				<p>${aantal}&nbsp;film(s) voor ${klant.voornaam}&nbsp;${klant.familienaam}</p>
+				<c:choose>
+					<c:when test="${aantal > 1}">
+						<c:set var="film_woord" value="films" />
+					</c:when>
+					<c:otherwise>
+						<c:set var="film_woord" value="film" />
+					</c:otherwise>
+				</c:choose>
+				<p>${aantal}&nbsp;${film_woord}voor
+					${klant.voornaam}&nbsp;${klant.familienaam}</p>
 				<form method="post" action="<c:url value="/rapport.htm"/>">
 					<input type="submit" value="Bevestigen">
 				</form>
 			</c:when>
 		</c:choose>
-				<c:choose>
+		<c:choose>
 			<c:when test="${not empty leeg}">
 				<p>${leeg}</p>
 			</c:when>
