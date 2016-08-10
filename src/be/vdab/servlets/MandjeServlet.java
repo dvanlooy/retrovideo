@@ -72,6 +72,7 @@ public class MandjeServlet extends HttpServlet {
 			if (!mandje.contains(id)) {
 				mandje.add(Long.parseLong(id));
 			}
+			request.getSession().setAttribute("mandje", mandje);
 		}
 
 		// CHECK IF ID's NEED TO BE REMOVED FROM mandje; WHEN NO FILMS IN
@@ -80,13 +81,12 @@ public class MandjeServlet extends HttpServlet {
 			for (String id : request.getParameterValues("remove")) {
 				mandje.remove(Long.parseLong(id));
 			}
-			if (mandje.isEmpty())
+			if (mandje.isEmpty()) {
 				request.getSession().removeAttribute("mandje");
+			} else {
+				request.getSession().setAttribute("mandje", mandje);
+			}
 		}
-
-		// PUT mandje IN SESSION IF NOT EMPTY
-		if (!mandje.isEmpty())
-			request.getSession().setAttribute("mandje", mandje);
 
 		// GET ON WITH IT
 		response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath()));
