@@ -23,7 +23,7 @@
 						<c:set var="film_woord" value="film" />
 					</c:otherwise>
 				</c:choose>
-				<p>${aantal}&nbsp;${film_woord}voor
+				<p>${aantal}&nbsp;${film_woord}&nbsp;voor
 					${klant.voornaam}&nbsp;${klant.familienaam}</p>
 				<form method="post" action="<c:url value="/rapport.htm"/>">
 					<input type="submit" value="Bevestigen">
