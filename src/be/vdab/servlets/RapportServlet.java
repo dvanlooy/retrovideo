@@ -56,12 +56,13 @@ public class RapportServlet extends HttpServlet {
 				reservaties.put(retrovideoDAO.findFilmById(filmid), false);
 			}
 		}
+		
+		//IF NO FALSE VALUES RESERVATION IS SUCCESFULL
 		if (!reservaties.values().contains(false)) {
-			request.getSession().removeAttribute("mandje");
-			request.getSession().removeAttribute("klantid");
-			request.getSession().setAttribute("succes", "De Reservate is OK");
-
+			request.getSession().setAttribute("succes", "De Reservatie is OK");
 		}
+		request.getSession().removeAttribute("mandje");
+		request.getSession().removeAttribute("klantid");
 		request.getSession().setAttribute("reservaties", reservaties);
 		
 		// GET ON WITH IT
