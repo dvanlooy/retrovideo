@@ -55,8 +55,13 @@ public class RapportServlet extends HttpServlet {
 				reservaties.put(retrovideoDAO.findFilmById(filmid), false);
 			}
 		}
-		
-
+		if (!reservaties.values().contains(false)){
+			request.getSession().removeAttribute("mandje");
+			request.getSession().removeAttribute("klantid");
+			request.getSession().setAttribute("succes", "success");
+			
+		}
+		request.getSession().setAttribute("reservaties", reservaties);
 	}
 
 }
