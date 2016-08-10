@@ -32,7 +32,7 @@
 				<tbody>
 					<c:forEach var="klant" items="${klanten}">
 						<c:url value="/bevestigen.htm" var="bevestigen">
-							<c:param name="klantid" value="${klant.id}" />
+							<c:param name="id" value="${klant.id}" />
 						</c:url>
 						<tr>
 							<td><a href="${bevestigen}">${klant.voornaam}&nbsp;${klant.familienaam}</a></td>

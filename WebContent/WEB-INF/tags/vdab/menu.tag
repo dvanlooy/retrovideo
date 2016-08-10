@@ -6,14 +6,11 @@
 		<ul>
 			<li><a href="<c:url value='/index.htm'/>">RESERVEREN</a></li>
 			<c:choose>
-				<c:when test='${current == "Mandje"}'>
+				<c:when test='${current == "Mandje" or current == "Bevestigen"}'>
 					<li><a href="<c:url value='/klant.htm'/>">KLANT</a></li>
 				</c:when>
-				<c:when
-					test='${current == "Klant" or current == "Overzicht Genres" or current == "Detail Film"}'>
-					<li><a href="<c:url value='/mandje.htm'/>">MANDJE</a></li>
-				</c:when>
 			</c:choose>
+			<li><a href="<c:url value='/mandje.htm'/>">MANDJE</a></li>
 			<li class="right">U BENT HIER: ${current}</li>
 		</ul>
 	</nav>

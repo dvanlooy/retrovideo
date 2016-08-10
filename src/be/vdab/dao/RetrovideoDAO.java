@@ -18,7 +18,10 @@ public class RetrovideoDAO extends AbstractDAO {
 	private static final String SELECT_GENRES = "SELECT * FROM genres ORDER BY naam";
 	private static final String SELECT_FILMS = "SELECT * FROM films INNER JOIN genres ON films.genreid = genres.id WHERE genreid = ? ORDER BY titel ASC";
 	private static final String SELECT_ONE_FILM = "SELECT * FROM films INNER JOIN genres ON films.genreid = genres.id WHERE films.id = ?";
+	
 	private static final String SELECT_KLANTEN_FAMILIENAAM = "SELECT * FROM klanten WHERE familienaam LIKE ? ORDER BY familienaam ASC";
+	private static final String SELECT_KLANT = "SELECT * FROM klanten WHERE id = ?";
+	
 	private final static Logger logger = Logger.getLogger(RetrovideoDAO.class.getName());
 
 	
@@ -128,7 +131,7 @@ public class RetrovideoDAO extends AbstractDAO {
 			statement.setString(1, zoekopdracht_SQL);
 			try (ResultSet resultSet = statement.executeQuery()) {
 				while (resultSet.next()) {
-					klanten.add(resultSetRijNaarKlant(resultSet));
+					klanten.add(resultSetRowToKlant(resultSet));
 				}
 				return klanten;
 			}
@@ -143,9 +146,26 @@ public class RetrovideoDAO extends AbstractDAO {
 	 * @return Klant Object
 	 * @throws SQLException
 	 */
-	private Klant resultSetRijNaarKlant(ResultSet resultSet) throws SQLException {
+	private Klant resultSetRowToKlant(ResultSet resultSet) throws SQLException {
 		return new Klant(resultSet.getLong("id"), resultSet.getString("familienaam"), 
 				resultSet.getString("voornaam"), resultSet.getString("straatNummer"), 
 				resultSet.getString("postcode"), resultSet.getString("gemeente"));
+	}
+	public Klant findKlantById(long id) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement = connection.prepareStatement(SELECT_KLANT)) {
+			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			statement.setLong(1, id);
+			try (ResultSet resultSet = statement.executeQuery()) {
+				Klant klant = null;
+				while (resultSet.next()) {
+					klant = resultSetRowToKlant(resultSet);
+				}
+				return klant;
+			}
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
+			throw new DAOException(ex);
+		}
 	}
 }
