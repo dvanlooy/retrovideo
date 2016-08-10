@@ -20,10 +20,6 @@ public class Film {
 		setPrijs(prijs);
 	}
 
-//	public Film createFilm(long id, Genre genre, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
-//		return new Film(id, genre, titel, voorraad, gereserveerd, prijs);
-//	}
-
 	// GETTERS & SETTERS
 	public long getId() {
 		return id;
@@ -72,5 +68,35 @@ public class Film {
 	public void setPrijs(BigDecimal prijs) {
 		this.prijs = prijs;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((titel == null) ? 0 : titel.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Film))
+			return false;
+		Film other = (Film) obj;
+		if (id != other.id)
+			return false;
+		if (titel == null) {
+			if (other.titel != null)
+				return false;
+		} else if (!titel.equals(other.titel))
+			return false;
+		return true;
+	}
+	
+	
 
 }

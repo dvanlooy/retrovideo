@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import be.vdab.entities.Film;
 import be.vdab.entities.Genre;
 import be.vdab.entities.Klant;
+import be.vdab.entities.Reservatie;
 
 public class RetrovideoDAO extends AbstractDAO {
 	private static final String SELECT_GENRES = "SELECT * FROM genres ORDER BY naam";
@@ -24,6 +25,8 @@ public class RetrovideoDAO extends AbstractDAO {
 	
 	private static final String INSERT_RESERVATIE = "INSERT INTO reservaties (klantid, filmid, reservatieDatum) VALUES (?, ? , {fn now()})";
 	private static final String UPDATE_FILM_GERESERVEERD = "UPDATE films SET gereserveerd = gereserveerd + 1 WHERE id = ? AND voorraad - gereserveerd > 0";
+	
+	private static final String SELECT_RESERVATIES = "SELECT * FROM reservaties ORDER BY filmid ASC";
 	
 	private final static Logger logger = Logger.getLogger(RetrovideoDAO.class.getName());
 
@@ -179,6 +182,12 @@ public class RetrovideoDAO extends AbstractDAO {
 	}
 	
 	//METHODS FOR RESERVATIE
+	/**
+	 * Make required updates in database for 1 film/reservation
+	 * @param filmid
+	 * @param klantid
+	 * @return true when update succesfull
+	 */
 	public boolean makeReservation (long filmid, long klantid){
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement_1 = connection.prepareStatement(UPDATE_FILM_GERESERVEERD);
@@ -206,4 +215,32 @@ public class RetrovideoDAO extends AbstractDAO {
 			throw new DAOException(ex);
 		}
 	}
+	/**
+	 * Gets all reservaties from database
+	 * @return List with Reservatie objects
+	 */
+	public List<Reservatie> findReservaties(){
+		try (Connection connection = dataSource.getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery(SELECT_RESERVATIES)) {
+			List<Reservatie> reservaties = new ArrayList<>();
+			while (resultSet.next()) {
+				reservaties.add(resultSetRowToReservatie(resultSet));
+			}
+			return reservaties;
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
+			throw new DAOException(ex);
+		}
+	}
+	/**
+	 * Builds a Reservatie object based on row data from ResultSet
+	 * @param resultSet
+	 * @return Reservatie Object
+	 * @throws SQLException
+	 */
+	private Reservatie resultSetRowToReservatie(ResultSet resultSet) throws SQLException {
+		return new Reservatie(resultSet.getLong("klantid"), resultSet.getLong("filmid"), resultSet.getDate("reservatieDatum"));
+	}
+	
 }

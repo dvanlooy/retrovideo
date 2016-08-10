@@ -78,6 +78,42 @@ public class Klant {
 	public void setGemeente(String gemeente) {
 		this.gemeente = gemeente;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((familienaam == null) ? 0 : familienaam.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((voornaam == null) ? 0 : voornaam.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Klant))
+			return false;
+		Klant other = (Klant) obj;
+		if (familienaam == null) {
+			if (other.familienaam != null)
+				return false;
+		} else if (!familienaam.equals(other.familienaam))
+			return false;
+		if (id != other.id)
+			return false;
+		if (voornaam == null) {
+			if (other.voornaam != null)
+				return false;
+		} else if (!voornaam.equals(other.voornaam))
+			return false;
+		return true;
+	}
+	
+	
 	
 
 	
