@@ -49,6 +49,7 @@ public class BeheerReservatiesServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("gereserveerdeFilms", gereserveerdeFilms);
+		request.setAttribute("reservaties", reservaties);
 		
 		// GET ON WITH IT
 		request.getRequestDispatcher(VIEW).forward(request, response);
