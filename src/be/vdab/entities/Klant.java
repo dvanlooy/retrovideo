@@ -29,7 +29,7 @@ public class Klant {
 
 
 	public void setId(long id) throws RetroException {
-		if (Invoercontrole.controleerLong(id)) {
+		if (Invoercontrole.isLongPositive(id)) {
 			this.id = id;
 		} else {
 			throw new RetroException("Klant id mag niet negatief zijn");
@@ -43,7 +43,7 @@ public class Klant {
 
 
 	public void setFamilienaam(String familienaam) throws RetroException {
-		if (Invoercontrole.controleerString(familienaam)) {
+		if (Invoercontrole.isStringNotNullOrEmpty(familienaam)) {
 			this.familienaam = familienaam;
 		} else {
 			throw new RetroException("Familienaam mag niet leeg of null zijn");
@@ -57,7 +57,7 @@ public class Klant {
 
 
 	public void setVoornaam(String voornaam) throws RetroException {
-		if (Invoercontrole.controleerString(voornaam)) {
+		if (Invoercontrole.isStringNotNullOrEmpty(voornaam)) {
 			this.voornaam = voornaam;
 		} else {
 			throw new RetroException("Voornaam mag niet leeg of null zijn");
@@ -71,7 +71,7 @@ public class Klant {
 
 
 	public void setStraatNummer(String straatNummer) throws RetroException {
-		if (Invoercontrole.controleerString(straatNummer)) {
+		if (Invoercontrole.isStringNotNullOrEmpty(straatNummer)) {
 			this.straatNummer = straatNummer;
 		} else {
 			throw new RetroException("StraatNummer mag niet leeg of null zijn");
@@ -85,7 +85,7 @@ public class Klant {
 
 
 	public void setPostcode(String postcode) throws RetroException {
-		if (Invoercontrole.controleerString(postcode)) {
+		if (Invoercontrole.isStringNotNullOrEmpty(postcode)) {
 			this.postcode = postcode;
 		} else {
 			throw new RetroException("Postcode mag niet leeg of null zijn");
@@ -99,7 +99,7 @@ public class Klant {
 
 
 	public void setGemeente(String gemeente) throws RetroException {
-		if (Invoercontrole.controleerString(gemeente)) {
+		if (Invoercontrole.isStringNotNullOrEmpty(gemeente)) {
 			this.gemeente = gemeente;
 		} else {
 			throw new RetroException("Gemeente mag niet leeg of null zijn");

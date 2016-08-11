@@ -23,7 +23,7 @@ public class Reservatie {
 		return klantid;
 	}
 	public void setKlantid(long klantid) throws RetroException {
-		if (Invoercontrole.controleerLong(klantid)) {
+		if (Invoercontrole.isLongPositive(klantid)) {
 			this.klantid = klantid;
 		} else {
 			throw new RetroException("Klantid mag niet negatief zijn");
@@ -33,7 +33,7 @@ public class Reservatie {
 		return filmid;
 	}
 	public void setFilmid(long filmid) throws RetroException {
-		if (Invoercontrole.controleerLong(filmid)) {
+		if (Invoercontrole.isLongPositive(filmid)) {
 			this.filmid = filmid;
 		} else {
 			throw new RetroException("Filmid mag niet negatief zijn");

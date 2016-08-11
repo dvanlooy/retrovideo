@@ -19,7 +19,7 @@ public class Genre {
 	}
 
 	public void setId(long id) throws RetroException {
-		if (Invoercontrole.controleerLong(id)) {
+		if (Invoercontrole.isLongPositive(id)) {
 			this.id = id;
 		} else {
 			throw new RetroException("Genre id mag niet negatief zijn");
@@ -31,7 +31,7 @@ public class Genre {
 	}
 
 	public void setNaam(String naam) throws RetroException {
-		if (Invoercontrole.controleerString(naam)) {
+		if (Invoercontrole.isStringNotNullOrEmpty(naam)) {
 			this.naam = naam;
 		} else {
 			throw new RetroException("Genre naam mag niet leeg of null zijn");

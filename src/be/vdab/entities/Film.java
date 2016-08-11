@@ -29,7 +29,7 @@ public class Film {
 	}
 
 	public void setId(long id) throws RetroException {
-		if (Invoercontrole.controleerLong(id)) {
+		if (Invoercontrole.isLongPositive(id)) {
 			this.id = id;
 		} else {
 			throw new RetroException("Film id mag niet negatief zijn");
@@ -49,7 +49,7 @@ public class Film {
 	}
 
 	public void setTitel(String titel) throws RetroException {
-		if (Invoercontrole.controleerString(titel)) {
+		if (Invoercontrole.isStringNotNullOrEmpty(titel)) {
 			this.titel = titel;
 		} else {
 			throw new RetroException("Film titel mag niet leeg of null zijn");
@@ -62,7 +62,7 @@ public class Film {
 	}
 
 	public void setVoorraad(int voorraad) throws RetroException {
-		if (Invoercontrole.controleerInt(voorraad)) {
+		if (Invoercontrole.isIntPositive(voorraad)) {
 			this.voorraad = voorraad;
 		} else {
 			throw new RetroException("Film voorraad mag niet negatief zijn");
@@ -75,7 +75,7 @@ public class Film {
 	}
 
 	public void setGereserveerd(int gereserveerd) throws RetroException {
-		if (Invoercontrole.controleerInt(gereserveerd)) {
+		if (Invoercontrole.isIntPositive(gereserveerd)) {
 			this.gereserveerd = gereserveerd;
 		} else {
 			throw new RetroException("Films gereserveerd mag niet negatief zijn");
@@ -88,7 +88,7 @@ public class Film {
 	}
 
 	public void setPrijs(BigDecimal prijs) throws RetroException  {
-		if (Invoercontrole.controleerBigDecimal(prijs)) {
+		if (Invoercontrole.isBigDecimalPositive(prijs)) {
 			this.prijs = prijs;
 		} else {
 			throw new RetroException("Prijs mag niet negatief zijn");

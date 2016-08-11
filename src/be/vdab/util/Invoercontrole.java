@@ -1,35 +1,38 @@
 package be.vdab.util;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Invoercontrole {
-	
-	public static boolean controleerLong(long param){
+
+	public static boolean isLongPositive(long param) {
 		if (param < 0) {
 			return false;
 		}
 		return true;
 	}
-	
-	public static boolean controleerString(String param){
-		if (param == null || param.equals("")){
+
+	public static boolean isStringNotNullOrEmpty(String param) {
+		if (param == null || param.equals("")) {
 			return false;
 		}
 		return true;
 	}
-	
-	public static boolean controleerInt(int param){
+
+	public static boolean isIntPositive(int param) {
 		if (param < 0) {
 			return false;
 		}
 		return true;
 	}
-	
-	public static boolean controleerBigDecimal(BigDecimal param){
+
+	public static boolean isBigDecimalPositive(BigDecimal param) {
+		Objects.requireNonNull(param, "parameter mag niet null zijn");
 		if (param.signum() == -1) {
 			return false;
 		}
 		return true;
 	}
-	
+
 }
