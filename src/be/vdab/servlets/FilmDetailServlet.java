@@ -10,18 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import be.vdab.dao.RetrovideoDAO;
+import be.vdab.dao.FilmDAO;
 import be.vdab.entities.Film;
 
 @WebServlet("/filmdetail.htm")
 public class FilmDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
+	private final transient FilmDAO filmDAO = new FilmDAO();
 	private static final String VIEW = "/WEB-INF/JSP/filmdetail.jsp";
 
-	@Resource(name = RetrovideoDAO.JNDI_NAME)
+	@Resource(name = FilmDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
-		retrovideoDAO.setDataSource(dataSource);
+		filmDAO.setDataSource(dataSource);
 	}
 
 	public FilmDetailServlet() {
@@ -36,7 +36,7 @@ public class FilmDetailServlet extends HttpServlet {
 		if (request.getParameter("id") != null){
 		try {
 			long selectedFilm = Long.parseLong(request.getParameter("id"));
-			Film film = retrovideoDAO.findFilmById(selectedFilm);
+			Film film = filmDAO.findFilmById(selectedFilm);
 			long beschikbaar = film.getVoorraad()-film.getGereserveerd();
 			request.setAttribute("beschikbaar", beschikbaar);
 			request.setAttribute("film", film);

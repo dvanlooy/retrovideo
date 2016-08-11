@@ -10,17 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import be.vdab.dao.RetrovideoDAO;
+import be.vdab.dao.KlantDAO;
 
 @WebServlet("/klant.htm")
 public class KlantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
+	private final transient KlantDAO klantDAO = new KlantDAO();
 	private static final String VIEW = "/WEB-INF/JSP/klant.jsp";
 
-	@Resource(name = RetrovideoDAO.JNDI_NAME)
+	@Resource(name = KlantDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
-		retrovideoDAO.setDataSource(dataSource);
+		klantDAO.setDataSource(dataSource);
 	}
 
 	public KlantServlet() {
@@ -33,7 +33,7 @@ public class KlantServlet extends HttpServlet {
 		if (request.getParameter("zoekopdracht") != null) {
 			if (!request.getParameter("zoekopdracht").isEmpty()) {
 				request.setAttribute("klanten",
-						retrovideoDAO.findKlantenByFamilienaam(request.getParameter("zoekopdracht")));
+						klantDAO.findKlantenByFamilienaam(request.getParameter("zoekopdracht")));
 			} else {
 				request.setAttribute("fout", "tik minstens één letter");
 			}

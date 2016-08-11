@@ -1,7 +1,6 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,21 +13,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import be.vdab.dao.RetrovideoDAO;
+import be.vdab.dao.FilmDAO;
+import be.vdab.dao.ReservatieDAO;
 import be.vdab.entities.Film;
-import be.vdab.entities.Klant;
 import be.vdab.entities.Reservatie;
 
 @WebServlet("/beheerreservaties.htm")
 public class BeheerReservatiesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
+	private final transient ReservatieDAO reservatieDAO = new ReservatieDAO();
+	private final transient FilmDAO filmDAO = new FilmDAO();
 	private static final String VIEW = "/WEB-INF/JSP/beheerreservaties.jsp";
 	private static final String REDIRECT_URL = "%s/beheerreservaties.htm";
 
-	@Resource(name = RetrovideoDAO.JNDI_NAME)
+	@Resource(name = ReservatieDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
-		retrovideoDAO.setDataSource(dataSource);
+		reservatieDAO.setDataSource(dataSource);
+		filmDAO.setDataSource(dataSource);
 	}
 
 	public BeheerReservatiesServlet() {
@@ -39,18 +40,16 @@ public class BeheerReservatiesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Reservatie> reservaties = retrovideoDAO.findReservaties();
-		
-		Set<Film> gereserveerdeFilms = new HashSet<>();
-		Set<Klant> klantenMetReservaties = new HashSet<>();
-		for (Reservatie reservatie : reservaties) {
-			gereserveerdeFilms.add(retrovideoDAO.findFilmById(reservatie.getFilmid()));
-			klantenMetReservaties.add(retrovideoDAO.findKlantById(reservatie.getKlantid()));
+		List<Reservatie> reservaties = reservatieDAO.findReservaties();
 
+		Set<Film> gereserveerdeFilms = new HashSet<>();
+		
+		for (Reservatie reservatie : reservaties) {
+			gereserveerdeFilms.add(filmDAO.findFilmById(reservatie.getFilmid()));
 		}
-		request.setAttribute("reservaties", reservaties);
+		
 		request.setAttribute("gereserveerdeFilms", gereserveerdeFilms);
-		request.setAttribute("klantenMetReservaties", klantenMetReservaties);
+		
 		// GET ON WITH IT
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}

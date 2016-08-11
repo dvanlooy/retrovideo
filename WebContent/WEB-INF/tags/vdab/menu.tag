@@ -11,6 +11,9 @@
 			<c:if test='${current != "Mandje"}'>
 				<li><a href="<c:url value='/mandje.htm'/>">MANDJE</a></li>
 			</c:if>
+						<c:if test='${current != "Beheer Reservaties"}'>
+				<li><a href="<c:url value='/beheerreservaties.htm'/>">BEHEER RESERVATIES</a></li>
+			</c:if>
 			<li class="right">U BENT HIER: ${current}</li>
 		</ul>
 	</nav>

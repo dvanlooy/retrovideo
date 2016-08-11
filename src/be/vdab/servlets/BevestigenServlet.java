@@ -11,18 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import be.vdab.dao.RetrovideoDAO;
+import be.vdab.dao.KlantDAO;
 
 
 @WebServlet("/bevestigen.htm")
 public class BevestigenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
+	private final transient KlantDAO klantDAO = new KlantDAO();
 	private static final String VIEW = "/WEB-INF/JSP/bevestigen.jsp";
 	
-	@Resource(name = RetrovideoDAO.JNDI_NAME)
+	@Resource(name = KlantDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
-		retrovideoDAO.setDataSource(dataSource);
+		klantDAO.setDataSource(dataSource);
 	}
 	
     public BevestigenServlet() {
@@ -43,7 +43,7 @@ public class BevestigenServlet extends HttpServlet {
 		}
 		// GET klant FROM PARAMETER
 		long klantid = Long.parseLong(request.getParameter("id"));
-		request.setAttribute("klant", retrovideoDAO.findKlantById(klantid));
+		request.setAttribute("klant", klantDAO.findKlantById(klantid));
 		request.getSession().setAttribute("klantid", klantid);
 		
 		

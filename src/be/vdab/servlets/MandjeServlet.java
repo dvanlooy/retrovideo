@@ -14,19 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import be.vdab.dao.RetrovideoDAO;
+import be.vdab.dao.FilmDAO;
 import be.vdab.entities.Film;
 
 @WebServlet("/mandje.htm")
 public class MandjeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
+	private final transient FilmDAO filmDAO = new FilmDAO();
 	private static final String VIEW = "/WEB-INF/JSP/mandje.jsp";
 	private static final String REDIRECT_URL = "%s/mandje.htm";
 
-	@Resource(name = RetrovideoDAO.JNDI_NAME)
+	@Resource(name = FilmDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
-		retrovideoDAO.setDataSource(dataSource);
+		filmDAO.setDataSource(dataSource);
 	}
 
 	public MandjeServlet() {
@@ -45,7 +45,7 @@ public class MandjeServlet extends HttpServlet {
 		if (mandje != null) {
 			List<Film> filmsInMandje = new ArrayList<>();
 			for (long id : mandje) {
-				filmsInMandje.add(retrovideoDAO.findFilmById(id));
+				filmsInMandje.add(filmDAO.findFilmById(id));
 			}
 			request.setAttribute("FilmsInMandje", filmsInMandje);
 		}

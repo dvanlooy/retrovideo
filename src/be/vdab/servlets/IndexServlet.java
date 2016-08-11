@@ -11,19 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import be.vdab.dao.RetrovideoDAO;
+import be.vdab.dao.FilmDAO;
+import be.vdab.dao.GenreDAO;
 import be.vdab.entities.Film;
 import be.vdab.entities.Genre;
 
 @WebServlet("/index.htm")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final transient RetrovideoDAO retrovideoDAO = new RetrovideoDAO();
+	private final transient GenreDAO genreDAO = new GenreDAO();
+	private final transient FilmDAO filmDAO = new FilmDAO();
 	private static final String VIEW = "/WEB-INF/JSP/index.jsp";
 
-	@Resource(name = RetrovideoDAO.JNDI_NAME)
+	@Resource(name = GenreDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
-		retrovideoDAO.setDataSource(dataSource);
+		genreDAO.setDataSource(dataSource);
+		filmDAO.setDataSource(dataSource);
 	}
 
 	public IndexServlet() {
@@ -34,7 +37,7 @@ public class IndexServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// FIND GENRES (TO DISPLAY MENU)
-		List<Genre> genres = retrovideoDAO.findGenres();
+		List<Genre> genres = genreDAO.findGenres();
 		request.setAttribute("genres", genres);
 
 		// FIND FILMS ON SELECTED GENRE
@@ -42,7 +45,7 @@ public class IndexServlet extends HttpServlet {
 		if (request.getParameter("id") != null){
 		try {
 			long selectedGenre = Long.parseLong(request.getParameter("id"));
-			List<Film> films = retrovideoDAO.findFilmsByGenre(selectedGenre);
+			List<Film> films = filmDAO.findFilmsByGenre(selectedGenre);
 			request.setAttribute("films", films);
 		} catch (NumberFormatException ex) {
 			request.setAttribute("fout", "Genre id niet correct");
