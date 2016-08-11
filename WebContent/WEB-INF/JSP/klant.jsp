@@ -13,6 +13,8 @@
 	<vdab:menu current='Klant' />
 	<div class="wrapper">
 		<h1>Klant</h1>
+		<c:choose>
+		<c:when test="${mandjeAanwezig}">
 		<form method="get" action="">
 			<label>Familienaam bevat:</label><br> <input type="text"
 				name="zoekopdracht" value="${param.zoekopdracht}" autofocus /> <input
@@ -47,6 +49,11 @@
 		<c:if test='${not empty param and empty fout and empty klanten}'>
 			<div class='fout'>Geen klanten gevonden</div>
 		</c:if>
+		</c:when>
+		<c:otherwise>
+		<div class='fout'>Er moet eerst een mandje gevuld worden!</div>
+		</c:otherwise>
+		</c:choose>
 	</div>
 </body>
 </html>

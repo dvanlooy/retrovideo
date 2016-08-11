@@ -38,6 +38,7 @@ public class KlantServlet extends HttpServlet {
 				request.setAttribute("fout", "tik minstens één letter");
 			}
 		}
+		if (request.getSession().getAttribute("mandje") != null) request.setAttribute("mandjeAanwezig", true);
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
