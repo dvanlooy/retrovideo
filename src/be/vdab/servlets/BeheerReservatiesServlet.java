@@ -1,8 +1,11 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -46,14 +49,18 @@ public class BeheerReservatiesServlet extends HttpServlet {
 
 		List<Reservatie> reservaties = reservatieDAO.findReservaties();
 		Set<Film> gereserveerdeFilms = new HashSet<>();
-		Set<Klant> klantenMetFilmGereserveerd = new HashSet<>();
+		Map<Klant, Date> klantenMetFilmGereserveerd = new HashMap<>();
+		
 
-		for (Reservatie reservatie : reservaties) {
-			gereserveerdeFilms.add(filmDAO.findFilmById(reservatie.getFilmid()));
+		// FIND GERESERVEERDE FILMS
+		if (request.getParameter("filmid") == null && request.getParameter("klantid") == null) {
+			for (Reservatie reservatie : reservaties) {
+				gereserveerdeFilms.add(filmDAO.findFilmById(reservatie.getFilmid()));
+			}
+			request.setAttribute("gereserveerdeFilms", gereserveerdeFilms);
 		}
 
-		request.setAttribute("gereserveerdeFilms", gereserveerdeFilms);
-		request.setAttribute("reservaties", reservaties);
+		
 
 		// FIND klanten WITH filmid IN RESERVATION
 		if (request.getParameter("filmid") != null) {
@@ -61,7 +68,7 @@ public class BeheerReservatiesServlet extends HttpServlet {
 				long filmid = Long.parseLong(request.getParameter("filmid"));
 				for (Reservatie reservatie : reservaties) {
 					if (reservatie.getFilmid() == filmid) {
-						klantenMetFilmGereserveerd.add(klantDAO.findKlantById(reservatie.getKlantid()));
+						klantenMetFilmGereserveerd.put(klantDAO.findKlantById(reservatie.getKlantid()),reservatie.getReservatieDatum());
 					}
 				}
 				request.setAttribute("geselecteerdeFilm", filmDAO.findFilmById(filmid));
@@ -69,6 +76,11 @@ public class BeheerReservatiesServlet extends HttpServlet {
 			} catch (NumberFormatException e) {
 				request.setAttribute("fout", "Geen correct filmid opgegeven");
 			}
+		}
+
+		// FIND reservations FOR klant IN RESERVATION
+		if (request.getParameter("filmid") != null && request.getParameter("klantid") != null) {
+			
 		}
 
 		// GET ON WITH IT

@@ -13,36 +13,45 @@
 	<vdab:menu current='Beheer Reservaties' />
 	<div class="wrapper">
 		<h1>Beheer Reservaties</h1>
-		<c:if test="${empty fout}">
 		<c:choose>
-			<c:when test='${not empty reservaties && empty klantenMetFilmGereserveerd}'>
-				<c:forEach var="film" items="${gereserveerdeFilms}">
-					<c:url value="/beheerreservaties.htm" var="filmid">
-						<c:param name="filmid" value="${film.id}" />
-					</c:url>
-					<p>
-						<a href="${filmid}">${film.titel}</a>
-					</p>
-				</c:forEach>
-			</c:when>
-			<c:when test='${not empty reservaties && not empty klantenMetFilmGereserveerd}'>
-			<h2>${geselecteerdeFilm.titel}&nbsp;werd gereserveerd door:</h2>
-			<c:forEach var="klant" items="${klantenMetFilmGereserveerd}">
-					<c:url value="/beheerreservaties.htm" var="klantid">
-						<c:param name="filmid" value="${geselecteerdeFilm.id}" />
-						<c:param name="klantid" value="${klant.id}" />
-					</c:url>
-					<p>
-						<a href="${klantid}">${klant.voornaam}&nbsp;${klant.familienaam}</a>
-					</p>
-				</c:forEach>
-				<p class="gaterug"><a href=<c:url value="/beheerreservaties.htm"/>>Ga terug...</a></p>
+			<c:when test="${empty fout}">
+				<c:choose>
+					<c:when
+						test='${not empty gereserveerdeFilms && empty klantenMetFilmGereserveerd}'>
+						<c:forEach var="film" items="${gereserveerdeFilms}">
+							<c:url value="/beheerreservaties.htm" var="filmid">
+								<c:param name="filmid" value="${film.id}" />
+							</c:url>
+							<p>
+								<a href="${filmid}">${film.titel}</a>
+							</p>
+						</c:forEach>
+					</c:when>
+					<c:when
+						test='${not empty geselecteerdeFilm && not empty klantenMetFilmGereserveerd}'>
+						<h2>${geselecteerdeFilm.titel}&nbsp;werd&nbsp;gereserveerd&nbsp;door:</h2>
+						<c:forEach var="klantReservatie" items="${klantenMetFilmGereserveerd}">
+							<c:url value="/beheerreservaties.htm" var="klantid">
+								<c:param name="filmid" value="${geselecteerdeFilm.id}" />
+								<c:param name="klantid" value="${klantReservatie.key.id}" />
+							</c:url>
+							<p>
+								<a href="${klantid}">${klantReservatie.key.voornaam}&nbsp;${klantReservatie.key.familienaam}&nbsp;op&nbsp;${klantReservatie.value}</a>
+							</p>
+						</c:forEach>
+						<p class="gaterug">
+							<a href=<c:url value="/beheerreservaties.htm"/>>Ga terug...</a>
+						</p>
+					</c:when>
+					<c:otherwise>
+						Geen reservaties te beheren!
+					</c:otherwise>
+				</c:choose>
 			</c:when>
 			<c:otherwise>
-			Geen reservaties te beheren!
+				<div class="fout">${fout}</div>
 			</c:otherwise>
 		</c:choose>
-		</c:if>
 	</div>
 </body>
 </html>
