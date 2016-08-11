@@ -36,7 +36,7 @@
 								<c:param name="klantid" value="${klantReservatie.key.id}" />
 							</c:url>
 							<p>
-								<a href="${klantid}">${klantReservatie.key.voornaam}&nbsp;${klantReservatie.key.familienaam}&nbsp;op&nbsp;${klantReservatie.value}</a>
+								${klantReservatie.key.voornaam}&nbsp;${klantReservatie.key.familienaam}&nbsp;op&nbsp;<fmt:formatDate type="both" dateStyle="full" timeStyle="medium" value='${klantReservatie.value}'/>:&nbsp;<a href="${klantid}">verwijder</a>
 							</p>
 						</c:forEach>
 						<p class="gaterug">

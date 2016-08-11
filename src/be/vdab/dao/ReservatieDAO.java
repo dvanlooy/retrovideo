@@ -90,7 +90,7 @@ public class ReservatieDAO extends AbstractDAO {
 		Reservatie reservatie = null;
 		try {
 			reservatie = new Reservatie(resultSet.getLong("klantid"), resultSet.getLong("filmid"),
-					resultSet.getDate("reservatieDatum"));
+					resultSet.getTimestamp("reservatieDatum"));
 		} catch (RetroException ex) {
 			logger.log(Level.SEVERE, "Probleem met het aanmaken van Reservatie Object", ex);
 		} catch (SQLException ex) {

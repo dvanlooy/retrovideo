@@ -1,6 +1,6 @@
 package be.vdab.entities;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import be.vdab.exceptions.RetroException;
 import be.vdab.util.Invoercontrole;
@@ -8,10 +8,10 @@ import be.vdab.util.Invoercontrole;
 public class Reservatie {
 	private long klantid;
 	private long filmid;
-	private Date reservatieDatum;
+	private Timestamp reservatieDatum;
 	
 	//constructors
-	public Reservatie(long klantid, long filmid, Date reservatieDatum) throws RetroException {
+	public Reservatie(long klantid, long filmid, Timestamp reservatieDatum) throws RetroException {
 		super();
 		setKlantid(klantid);
 		setFilmid(filmid);
@@ -39,10 +39,10 @@ public class Reservatie {
 			throw new RetroException("Filmid mag niet negatief zijn");
 		}
 	}
-	public Date getReservatieDatum() {
+	public Timestamp getReservatieDatum() {
 		return reservatieDatum;
 	}
-	public void setReservatieDatum(Date reservatieDatum){
+	public void setReservatieDatum(Timestamp reservatieDatum){
 		this.reservatieDatum = reservatieDatum;
 	}
 
