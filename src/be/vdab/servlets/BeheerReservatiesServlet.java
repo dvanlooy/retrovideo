@@ -77,20 +77,6 @@ public class BeheerReservatiesServlet extends HttpServlet {
 			}
 		}
 
-		// REMOVE reservatie
-//		if (request.getParameter("filmid") != null && request.getParameter("klantid") != null
-//				&& request.getParameter("reservatieDatum") != null) {
-//			try {
-//				long filmid = Long.parseLong(request.getParameter("filmid"));
-//				long klantid = Long.parseLong(request.getParameter("klantid"));
-//				Timestamp reservatieDatum = Timestamp.valueOf(request.getParameter("reservatieDatum"));
-//
-//				request.setAttribute("removed", reservatieDAO.removeReservation(filmid, klantid, reservatieDatum));
-//
-//			} catch (IllegalArgumentException e) {
-//				request.setAttribute("fout", "Fout bij het verzamelen van de parameters");
-//			}
-//		}
 
 		// GET ON WITH IT
 		request.getRequestDispatcher(VIEW).forward(request, response);
@@ -98,7 +84,8 @@ public class BeheerReservatiesServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		//REMOVE reservatie
 			if (Boolean.parseBoolean(request.getParameter("remove"))){
 				try {
 					long filmid = Long.parseLong(request.getParameter("filmid"));
