@@ -16,8 +16,11 @@ import be.vdab.exceptions.RetroException;
 public class KlantDAO extends AbstractDAO {
 	private final static Logger logger = Logger.getLogger(KlantDAO.class.getName());
 	
-	private static final String SELECT_KLANTEN_FAMILIENAAM = "SELECT * FROM klanten WHERE familienaam LIKE ? ORDER BY familienaam ASC";
-	private static final String SELECT_KLANT = "SELECT * FROM klanten WHERE id = ?";
+	private static final String SELECT_KLANTEN_FAMILIENAAM = "SELECT * FROM klanten "
+			+ "WHERE familienaam LIKE ? "
+			+ "ORDER BY familienaam ASC";
+	private static final String SELECT_KLANT = "SELECT * FROM klanten "
+			+ "WHERE id = ?";
 	
 	/**
 	 * Gets all klanten from a specified zoekopdracht from database

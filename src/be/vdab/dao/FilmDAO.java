@@ -17,14 +17,19 @@ import be.vdab.exceptions.RetroException;
 public class FilmDAO extends AbstractDAO {
 	private final static Logger logger = Logger.getLogger(FilmDAO.class.getName());
 
-	private static final String SELECT_FILMS = "SELECT * FROM films INNER JOIN genres ON films.genreid = genres.id WHERE genreid = ? ORDER BY titel ASC";
-	private static final String SELECT_ONE_FILM = "SELECT * FROM films INNER JOIN genres ON films.genreid = genres.id WHERE films.id = ?";
-	public static final String UPDATE_FILM_GERESERVEERD = "UPDATE films SET gereserveerd = gereserveerd + 1 WHERE id = ? AND voorraad - gereserveerd > 0";
+	private static final String SELECT_FILMS = "SELECT * FROM films "
+			+ "INNER JOIN genres ON films.genreid = genres.id "
+			+ "WHERE genreid = ? "
+			+ "ORDER BY titel ASC";
+	private static final String SELECT_ONE_FILM = "SELECT * FROM films "
+			+ "INNER JOIN genres ON films.genreid = genres.id "
+			+ "WHERE films.id = ?";
+	public static final String UPDATE_FILM_GERESERVEERD = "UPDATE films "
+			+ "SET gereserveerd = gereserveerd + 1 "
+			+ "WHERE id = ? "
+			+ "AND voorraad - gereserveerd > 0";
 
-	// GETTER
-	// public String getUpdateFilmGereserveerd() {
-	// return UPDATE_FILM_GERESERVEERD;
-	// }
+
 
 	/**
 	 * Gets all films from a specified Genre from database

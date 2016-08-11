@@ -18,8 +18,11 @@ public class ReservatieDAO extends AbstractDAO {
 	private final static Logger logger = Logger.getLogger(ReservatieDAO.class.getName());
 //	private final transient FilmDAO filmDAO = new FilmDAO();
 
-	private static final String INSERT_RESERVATIE = "INSERT INTO reservaties (klantid, filmid, reservatieDatum) VALUES (?, ? , {fn now()})";
-	private static final String SELECT_RESERVATIES = "SELECT * FROM reservaties ORDER BY filmid ASC";
+	private static final String INSERT_RESERVATIE = "INSERT INTO reservaties "
+			+ "(klantid, filmid, reservatieDatum) "
+			+ "VALUES (?, ? , {fn now()})";
+	private static final String SELECT_RESERVATIES = "SELECT * FROM reservaties "
+			+ "ORDER BY filmid ASC";
 
 	/**
 	 * Make required updates in database for 1 film/reservation

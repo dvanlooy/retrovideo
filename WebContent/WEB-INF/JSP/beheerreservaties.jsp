@@ -13,8 +13,9 @@
 	<vdab:menu current='Beheer Reservaties' />
 	<div class="wrapper">
 		<h1>Beheer Reservaties</h1>
+		<c:if test="${empty fout}">
 		<c:choose>
-			<c:when test='${not empty reservaties}'>
+			<c:when test='${not empty reservaties && empty klantenMetFilmGereserveerd}'>
 				<c:forEach var="film" items="${gereserveerdeFilms}">
 					<c:url value="/beheerreservaties.htm" var="filmid">
 						<c:param name="filmid" value="${film.id}" />
@@ -24,10 +25,14 @@
 					</p>
 				</c:forEach>
 			</c:when>
+			<c:when test='${not empty reservaties && not empty klantenMetFilmGereserveerd}'>
+			
+			</c:when>
 			<c:otherwise>
 			Geen reservaties te beheren!
 			</c:otherwise>
 		</c:choose>
+		</c:if>
 	</div>
 </body>
 </html>

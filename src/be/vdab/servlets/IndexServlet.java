@@ -41,7 +41,6 @@ public class IndexServlet extends HttpServlet {
 		request.setAttribute("genres", genres);
 
 		// FIND FILMS ON SELECTED GENRE
-//		long selectedGenre = 0L;
 		if (request.getParameter("id") != null){
 		try {
 			long selectedGenre = Long.parseLong(request.getParameter("id"));
