@@ -64,7 +64,7 @@ public class BeheerReservatiesServlet extends HttpServlet {
 						klantenMetFilmGereserveerd.add(klantDAO.findKlantById(reservatie.getKlantid()));
 					}
 				}
-				request.setAttribute("geselecteerdeFilm", filmDAO.findFilmById(filmid).getTitel());
+				request.setAttribute("geselecteerdeFilm", filmDAO.findFilmById(filmid));
 				request.setAttribute("klantenMetFilmGereserveerd", klantenMetFilmGereserveerd);
 			} catch (NumberFormatException e) {
 				request.setAttribute("fout", "Geen correct filmid opgegeven");

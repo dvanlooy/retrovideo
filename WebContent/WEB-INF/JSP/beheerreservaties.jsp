@@ -26,7 +26,17 @@
 				</c:forEach>
 			</c:when>
 			<c:when test='${not empty reservaties && not empty klantenMetFilmGereserveerd}'>
-			
+			<h2>${geselecteerdeFilm.titel}&nbsp;werd gereserveerd door:</h2>
+			<c:forEach var="klant" items="${klantenMetFilmGereserveerd}">
+					<c:url value="/beheerreservaties.htm" var="klantid">
+						<c:param name="filmid" value="${geselecteerdeFilm.id}" />
+						<c:param name="klantid" value="${klant.id}" />
+					</c:url>
+					<p>
+						<a href="${klantid}">${klant.voornaam}&nbsp;${klant.familienaam}</a>
+					</p>
+				</c:forEach>
+				<p class="gaterug"><a href=<c:url value="/beheerreservaties.htm"/>>Ga terug...</a></p>
 			</c:when>
 			<c:otherwise>
 			Geen reservaties te beheren!
