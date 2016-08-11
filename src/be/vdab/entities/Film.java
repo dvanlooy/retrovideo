@@ -68,7 +68,8 @@ public class Film {
 	public void setPrijs(BigDecimal prijs) {
 		this.prijs = prijs;
 	}
-
+	
+	//HASHCODE & EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +80,9 @@ public class Film {
 	}
 
 	@Override
+	/**
+	 * Film Objects are equal when both id and titel are the same
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;

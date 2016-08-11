@@ -79,6 +79,7 @@ public class Klant {
 		this.gemeente = gemeente;
 	}
 
+	//HASHCODE & EQUALS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +91,9 @@ public class Klant {
 	}
 
 	@Override
+	/**
+	 * Klant Objects are equal when both id, familienaam and voornaam are the same
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
