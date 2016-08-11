@@ -1,4 +1,4 @@
-package be.vdab.dao;
+package be.vdab.exceptions;
 
 public class DAOException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

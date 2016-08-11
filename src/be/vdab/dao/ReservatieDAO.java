@@ -11,10 +11,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import be.vdab.entities.Reservatie;
+import be.vdab.exceptions.DAOException;
+import be.vdab.exceptions.RetroException;
 
 public class ReservatieDAO extends AbstractDAO {
 	private final static Logger logger = Logger.getLogger(ReservatieDAO.class.getName());
-	private final transient FilmDAO filmDAO = new FilmDAO();
+//	private final transient FilmDAO filmDAO = new FilmDAO();
 
 	private static final String INSERT_RESERVATIE = "INSERT INTO reservaties (klantid, filmid, reservatieDatum) VALUES (?, ? , {fn now()})";
 	private static final String SELECT_RESERVATIES = "SELECT * FROM reservaties ORDER BY filmid ASC";
@@ -28,7 +30,7 @@ public class ReservatieDAO extends AbstractDAO {
 	 */
 	public boolean makeReservation(long filmid, long klantid) {
 		try (Connection connection = dataSource.getConnection();
-				PreparedStatement statement_1 = connection.prepareStatement(filmDAO.getUpdateFilmGereserveerd());
+				PreparedStatement statement_1 = connection.prepareStatement(FilmDAO.UPDATE_FILM_GERESERVEERD);
 				PreparedStatement statement_2 = connection.prepareStatement(INSERT_RESERVATIE)) {
 			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
 			connection.setAutoCommit(false);
@@ -79,11 +81,19 @@ public class ReservatieDAO extends AbstractDAO {
 	 * 
 	 * @param resultSet
 	 * @return Reservatie Object
-	 * @throws SQLException
+	 * @throws DAOException
 	 */
-	private Reservatie resultSetRowToReservatie(ResultSet resultSet) throws SQLException {
-		return new Reservatie(resultSet.getLong("klantid"), resultSet.getLong("filmid"),
-				resultSet.getDate("reservatieDatum"));
+	private Reservatie resultSetRowToReservatie(ResultSet resultSet) throws DAOException {
+		Reservatie reservatie = null;
+		try {
+			reservatie = new Reservatie(resultSet.getLong("klantid"), resultSet.getLong("filmid"),
+					resultSet.getDate("reservatieDatum"));
+		} catch (RetroException ex) {
+			logger.log(Level.SEVERE, "Probleem met het aanmaken van Reservatie Object", ex);
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met ResultSet verwerking", ex);
+			throw new DAOException(ex);
+		}
+		return reservatie;
 	}
-
 }

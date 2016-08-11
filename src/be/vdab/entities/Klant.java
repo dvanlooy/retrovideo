@@ -1,5 +1,8 @@
 package be.vdab.entities;
 
+import be.vdab.exceptions.RetroException;
+import be.vdab.util.Invoercontrole;
+
 public class Klant {
 	private long id;
 	private String familienaam;
@@ -10,13 +13,13 @@ public class Klant {
 	
 	
 	//constructors
-	public Klant(long id, String familienaam, String voornaam, String straatNummer, String postcode, String gemeente) {
-		this.id = id;
-		this.familienaam = familienaam;
-		this.voornaam = voornaam;
-		this.straatNummer = straatNummer;
-		this.postcode = postcode;
-		this.gemeente = gemeente;
+	public Klant(long id, String familienaam, String voornaam, String straatNummer, String postcode, String gemeente) throws RetroException {
+		setId(id);
+		setFamilienaam(familienaam);
+		setVoornaam(voornaam);
+		setStraatNummer(straatNummer);
+		setPostcode(postcode);
+		setGemeente(gemeente);
 	}
 
 	//GETTERS & SETTERS
@@ -25,8 +28,12 @@ public class Klant {
 	}
 
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long id) throws RetroException {
+		if (Invoercontrole.controleerLong(id)) {
+			this.id = id;
+		} else {
+			throw new RetroException("Klant id mag niet negatief zijn");
+		}
 	}
 
 
@@ -35,8 +42,12 @@ public class Klant {
 	}
 
 
-	public void setFamilienaam(String familienaam) {
-		this.familienaam = familienaam;
+	public void setFamilienaam(String familienaam) throws RetroException {
+		if (Invoercontrole.controleerString(familienaam)) {
+			this.familienaam = familienaam;
+		} else {
+			throw new RetroException("Familienaam mag niet leeg of null zijn");
+		}
 	}
 
 
@@ -45,8 +56,12 @@ public class Klant {
 	}
 
 
-	public void setVoornaam(String voornaam) {
-		this.voornaam = voornaam;
+	public void setVoornaam(String voornaam) throws RetroException {
+		if (Invoercontrole.controleerString(voornaam)) {
+			this.voornaam = voornaam;
+		} else {
+			throw new RetroException("Voornaam mag niet leeg of null zijn");
+		}
 	}
 
 
@@ -55,8 +70,12 @@ public class Klant {
 	}
 
 
-	public void setStraatNummer(String straatNummer) {
-		this.straatNummer = straatNummer;
+	public void setStraatNummer(String straatNummer) throws RetroException {
+		if (Invoercontrole.controleerString(straatNummer)) {
+			this.straatNummer = straatNummer;
+		} else {
+			throw new RetroException("StraatNummer mag niet leeg of null zijn");
+		}
 	}
 
 
@@ -65,8 +84,12 @@ public class Klant {
 	}
 
 
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
+	public void setPostcode(String postcode) throws RetroException {
+		if (Invoercontrole.controleerString(postcode)) {
+			this.postcode = postcode;
+		} else {
+			throw new RetroException("Postcode mag niet leeg of null zijn");
+		}
 	}
 
 
@@ -75,8 +98,12 @@ public class Klant {
 	}
 
 
-	public void setGemeente(String gemeente) {
-		this.gemeente = gemeente;
+	public void setGemeente(String gemeente) throws RetroException {
+		if (Invoercontrole.controleerString(gemeente)) {
+			this.gemeente = gemeente;
+		} else {
+			throw new RetroException("Gemeente mag niet leeg of null zijn");
+		}
 	}
 
 	//HASHCODE & EQUALS
@@ -115,6 +142,12 @@ public class Klant {
 		} else if (!voornaam.equals(other.voornaam))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Klant [id=" + id + ", familienaam=" + familienaam + ", voornaam=" + voornaam + ", straatNummer="
+				+ straatNummer + ", postcode=" + postcode + ", gemeente=" + gemeente + "]";
 	}
 	
 	

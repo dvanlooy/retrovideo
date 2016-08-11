@@ -2,36 +2,47 @@ package be.vdab.entities;
 
 import java.sql.Date;
 
+import be.vdab.exceptions.RetroException;
+import be.vdab.util.Invoercontrole;
+
 public class Reservatie {
 	private long klantid;
 	private long filmid;
 	private Date reservatieDatum;
 	
 	//constructors
-	public Reservatie(long klantid, long filmid, Date reservatieDatum) {
+	public Reservatie(long klantid, long filmid, Date reservatieDatum) throws RetroException {
 		super();
-		this.klantid = klantid;
-		this.filmid = filmid;
-		this.reservatieDatum = reservatieDatum;
+		setKlantid(klantid);
+		setFilmid(filmid);
+		setReservatieDatum(reservatieDatum);
 	}
 	
 	//GETTERS & SETTERS
 	public long getKlantid() {
 		return klantid;
 	}
-	public void setKlantid(long klantid) {
-		this.klantid = klantid;
+	public void setKlantid(long klantid) throws RetroException {
+		if (Invoercontrole.controleerLong(klantid)) {
+			this.klantid = klantid;
+		} else {
+			throw new RetroException("Klantid mag niet negatief zijn");
+		}
 	}
 	public long getFilmid() {
 		return filmid;
 	}
-	public void setFilmid(long filmid) {
-		this.filmid = filmid;
+	public void setFilmid(long filmid) throws RetroException {
+		if (Invoercontrole.controleerLong(filmid)) {
+			this.filmid = filmid;
+		} else {
+			throw new RetroException("Filmid mag niet negatief zijn");
+		}
 	}
 	public Date getReservatieDatum() {
 		return reservatieDatum;
 	}
-	public void setReservatieDatum(Date reservatieDatum) {
+	public void setReservatieDatum(Date reservatieDatum){
 		this.reservatieDatum = reservatieDatum;
 	}
 
@@ -68,6 +79,11 @@ public class Reservatie {
 		} else if (!reservatieDatum.equals(other.reservatieDatum))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Reservatie [klantid=" + klantid + ", filmid=" + filmid + ", reservatieDatum=" + reservatieDatum + "]";
 	}
 	
 

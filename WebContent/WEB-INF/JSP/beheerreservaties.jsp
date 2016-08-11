@@ -16,7 +16,12 @@
 		<c:choose>
 			<c:when test='${not empty reservaties}'>
 				<c:forEach var="film" items="${gereserveerdeFilms}">
-					${film.titel}<br>
+					<c:url value="/beheerreservaties.htm" var="filmid">
+						<c:param name="filmid" value="${film.id}" />
+					</c:url>
+					<p>
+						<a href="${filmid}">${film.titel}</a>
+					</p>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>

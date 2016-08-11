@@ -1,11 +1,14 @@
 package be.vdab.entities;
 
+import be.vdab.exceptions.RetroException;
+import be.vdab.util.Invoercontrole;
+
 public class Genre {
 	private long id;
 	private String naam;
 
 	// constructors
-	public Genre(long id, String naam) {
+	public Genre(long id, String naam) throws RetroException {
 		setId(id);
 		setNaam(naam);
 	}
@@ -15,16 +18,24 @@ public class Genre {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setId(long id) throws RetroException {
+		if (Invoercontrole.controleerLong(id)) {
+			this.id = id;
+		} else {
+			throw new RetroException("Genre id mag niet negatief zijn");
+		}
 	}
 
 	public String getNaam() {
 		return naam;
 	}
 
-	public void setNaam(String naam) {
-		this.naam = naam;
+	public void setNaam(String naam) throws RetroException {
+		if (Invoercontrole.controleerString(naam)) {
+			this.naam = naam;
+		} else {
+			throw new RetroException("Genre naam mag niet leeg of null zijn");
+		}
 	}
 
 	//HASHCODE & EQUALS
@@ -58,6 +69,13 @@ public class Genre {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Genre [id=" + id + ", naam=" + naam + "]";
+	}
+	
+	
 	
 
 }

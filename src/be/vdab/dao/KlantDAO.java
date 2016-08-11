@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import be.vdab.entities.Klant;
+import be.vdab.exceptions.DAOException;
+import be.vdab.exceptions.RetroException;
 
 public class KlantDAO extends AbstractDAO {
 	private final static Logger logger = Logger.getLogger(KlantDAO.class.getName());
@@ -42,17 +44,6 @@ public class KlantDAO extends AbstractDAO {
 			throw new DAOException(ex);
 		}
 	}
-	/**
-	 * Builds a Klant object based on row data from ResultSet
-	 * @param resultSet
-	 * @return Klant Object
-	 * @throws SQLException
-	 */
-	private Klant resultSetRowToKlant(ResultSet resultSet) throws SQLException {
-		return new Klant(resultSet.getLong("id"), resultSet.getString("familienaam"), 
-				resultSet.getString("voornaam"), resultSet.getString("straatNummer"), 
-				resultSet.getString("postcode"), resultSet.getString("gemeente"));
-	}
 	
 	/**
 	 * Gets a Klant from database
@@ -75,5 +66,26 @@ public class KlantDAO extends AbstractDAO {
 			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
 			throw new DAOException(ex);
 		}
+	}
+	
+	/**
+	 * Builds a Klant object based on row data from ResultSet
+	 * @param resultSet
+	 * @return Klant Object or null when Exception is thrown
+	 * @throws DAOException
+	 */
+	private Klant resultSetRowToKlant(ResultSet resultSet) throws DAOException {
+		Klant klant = null;
+		try {
+			klant = new Klant(resultSet.getLong("id"), resultSet.getString("familienaam"), 
+					resultSet.getString("voornaam"), resultSet.getString("straatNummer"), 
+					resultSet.getString("postcode"), resultSet.getString("gemeente"));
+		} catch (RetroException ex) {
+			logger.log(Level.SEVERE, "Probleem met het aanmaken van Klant Object", ex);
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met ResultSet verwerking", ex);
+			throw new DAOException(ex);
+		}
+		return klant;
 	}
 }
