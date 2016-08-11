@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,6 +24,10 @@ public class ReservatieDAO extends AbstractDAO {
 			+ "VALUES (?, ? , {fn now()})";
 	private static final String SELECT_RESERVATIES = "SELECT * FROM reservaties "
 			+ "ORDER BY filmid ASC";
+	private static final String DELETE_RESERVATIE = "DELETE FROM reservaties "
+			+ "WHERE klantid = ? "
+			+ "AND filmid = ? "
+			+ "AND reservatieDatum = ?";
 
 	/**
 	 * Make required updates in database for 1 film/reservation
@@ -58,6 +63,44 @@ public class ReservatieDAO extends AbstractDAO {
 			throw new DAOException(ex);
 		}
 	}
+	
+	/**
+	 * Removes a reservation and adjust gereserveerd in film
+	 * @param filmid
+	 * @param klantid
+	 * @param reservatieDatum
+	 * @return
+	 */
+	public boolean removeReservation(long filmid, long klantid, Timestamp reservatieDatum) {
+		try (Connection connection = dataSource.getConnection();
+				PreparedStatement statement_1 = connection.prepareStatement(FilmDAO.UPDATE_FILM_VERWIJDER_RESERVATIE);
+				PreparedStatement statement_2 = connection.prepareStatement(DELETE_RESERVATIE)) {
+			connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+			connection.setAutoCommit(false);
+
+			statement_1.setLong(1, filmid);
+
+			statement_2.setLong(1, klantid);
+			statement_2.setLong(2, filmid);
+			statement_2.setTimestamp(3, reservatieDatum);
+
+			int filmsUpdated = statement_1.executeUpdate();
+			if (filmsUpdated == 1) {
+				statement_2.executeUpdate();
+				connection.commit();
+				return true;
+			} else {
+				connection.rollback();
+				return false;
+			}
+
+		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database retrovideo", ex);
+			throw new DAOException(ex);
+		}
+	}
+	
+	
 
 	/**
 	 * Gets all reservaties from database

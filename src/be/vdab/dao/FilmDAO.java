@@ -28,8 +28,10 @@ public class FilmDAO extends AbstractDAO {
 			+ "SET gereserveerd = gereserveerd + 1 "
 			+ "WHERE id = ? "
 			+ "AND voorraad - gereserveerd > 0";
-
-
+	public static final String UPDATE_FILM_VERWIJDER_RESERVATIE = "UPDATE films "
+			+ "SET gereserveerd = gereserveerd -1 "
+			+ "WHERE id = ? "
+			+ "AND gereserveerd > 0";
 
 	/**
 	 * Gets all films from a specified Genre from database
