@@ -16,7 +16,8 @@
 		<c:choose>
 			<c:when test="${empty fout}">
 				<c:choose>
-					<c:when	test='${not empty gereserveerdeFilms}'>
+					<c:when test='${not empty gereserveerdeFilms}'>
+						<h2>Volgende films zijn gereserveerd:</h2>
 						<c:forEach var="film" items="${gereserveerdeFilms}">
 							<c:url value="/beheerreservaties.htm" var="filmid">
 								<c:param name="filmid" value="${film.id}" />
@@ -26,9 +27,10 @@
 							</p>
 						</c:forEach>
 					</c:when>
-					<c:when	test='${not empty klantenMetFilmGereserveerd}'>
+					<c:when test='${not empty klantenMetFilmGereserveerd}'>
 						<h2>${geselecteerdeFilm.titel}&nbsp;werd&nbsp;gereserveerd&nbsp;door:</h2>
-						<c:forEach var="klantReservatie" items="${klantenMetFilmGereserveerd}">
+						<c:forEach var="klantReservatie"
+							items="${klantenMetFilmGereserveerd}">
 							<c:url value="/beheerreservaties.htm" var="klantid">
 								<c:param name="filmid" value="${geselecteerdeFilm.id}" />
 								<c:param name="klantid" value="${klantReservatie.key.id}" />
@@ -36,25 +38,25 @@
 							</c:url>
 							<p><form action="" method="post">
 								${klantReservatie.key.voornaam}&nbsp;${klantReservatie.key.familienaam}&nbsp;op&nbsp;
-								<fmt:formatDate type="both" dateStyle="full" timeStyle="medium" value='${klantReservatie.value}'/>
-								:&nbsp;
-								
-								<input type='hidden' name='remove' value="true">
-								<input type='hidden' name='filmid' value='${geselecteerdeFilm.id}'>
-								<input type='hidden' name='klantid' value='${klantReservatie.key.id}'>
-								<input type='hidden' name='reservatieDatum' value='${klantReservatie.value}'>
-								<input type="submit" value="Verwijderen"/>
-								
-							</p>
-						</c:forEach>
+								<fmt:formatDate type="both" dateStyle="full" timeStyle="medium"
+									value='${klantReservatie.value}' />
+								:&nbsp; <input type='hidden' name='remove' value="true">
+								<input type='hidden' name='filmid'
+									value='${geselecteerdeFilm.id}'> <input type='hidden'
+									name='klantid' value='${klantReservatie.key.id}'> <input
+									type='hidden' name='reservatieDatum'
+									value='${klantReservatie.value}'> <input type="submit"
+									value="Verwijderen" />
+
+							</p></c:forEach>
 						<p class="gaterug">
 							<a href=<c:url value="/beheerreservaties.htm"/>>Ga terug...</a>
 						</p>
 					</c:when>
-					<c:when	test='${not empty removed || not empty fout}'>
-					<div class="fout">${removed}</div>
-					<div class="fout">${fout}</div>
-					
+					<c:when test='${not empty removed || not empty fout}'>
+						<div class="fout">${removed}</div>
+						<div class="fout">${fout}</div>
+
 					</c:when>
 					<c:otherwise>
 						Geen reservaties te beheren!
