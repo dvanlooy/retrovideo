@@ -83,8 +83,16 @@ tr:nth-child(even) {
 	text-align: center;
 }
 
-.fout {
+span.fout {
 	margin: 0 0.25em;
+	padding: 0.25em;
+	text-align: center;
+	color: red;
+	background-color: #ffc6c6;
+	border: solid 1px red;
+}
+div.fout {
+	margin: 1em 0em;
 	padding: 0.25em;
 	text-align: center;
 	color: red;
@@ -164,4 +172,25 @@ tr:nth-child(even) {
 	display: block;
 	background-color: #4CAF50;
 	padding: 7px 8px;
+}
+/**** FILMDETAIL ****/
+div.filmdetail{
+	width: 400px;
+}
+aside.filmdetail {
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+aside.filmdetail img {
+    width: 150px;
+}
+section.filmdetail {
+    margin-left: 170px;
+    overflow: hidden;
+}
+details.filmdetail {
+    margin-left: 170px;
+    padding: 1em;
+    overflow: hidden;
 }

@@ -10,7 +10,7 @@
 </c:import>
 </head>
 <body>
-	<vdab:menu current='Detail Film'/>
+	<vdab:menu current='Detail Film' />
 	<div class="wrapper">
 		<c:choose>
 			<c:when test='${not empty fout}'>
@@ -18,23 +18,33 @@
 			</c:when>
 			<c:otherwise>
 				<h1>${film.titel}</h1>
-				<img src=<c:url value='/images/${film.id}.jpg'/> alt='${film.titel}'
-					title='${film.titel}'>
-				<dl>
-					<dt>Prijs</dt>
-					<dd>&euro; ${film.prijs}</dd>
-					<dt>Voorraad</dt>
-					<dd>${film.voorraad}</dd>
-					<dt>Gereserveerd</dt>
-					<dd>${film.gereserveerd}</dd>
-					<dt>Beschikbaar</dt>
-					<dd>${beschikbaar}</dd>
-				</dl>
-				<form method="post" action="<c:url value="/mandje.htm" />" id="form">
-					<input name="add" value="${film.id}" hidden="true" /> <input
-						type="submit" value="In mandje" name="submit" id="knop"
-						<c:if test="${beschikbaar <= 0}">disabled="true"</c:if> />
-				</form>
+				<div class="filmdetail">
+					<aside class="filmdetail">
+						<img src=<c:url value='/images/${film.id}.jpg'/>
+							alt='${film.titel}' title='${film.titel}'>
+					</aside>
+					<section class="filmdetail">
+						<form method="post" action="<c:url value="/mandje.htm" />"
+							id="form">
+							<input name="add" value="${film.id}" hidden="true" /> <input
+								type="submit" value="In mandje" name="submit" id="knop"
+								<c:if test="${beschikbaar <= 0}">disabled="true"</c:if> />
+						</form>
+					</section>
+					<details class="filmdetail">
+						<dl>
+							<dt>Prijs</dt>
+							<dd>&euro; ${film.prijs}</dd>
+							<dt>Voorraad</dt>
+							<dd>${film.voorraad}</dd>
+							<dt>Gereserveerd</dt>
+							<dd>${film.gereserveerd}</dd>
+							<dt>Beschikbaar</dt>
+							<dd>${beschikbaar}</dd>
+						</dl>
+
+					</details>
+				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>

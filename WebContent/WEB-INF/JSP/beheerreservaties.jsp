@@ -36,7 +36,8 @@
 								<c:param name="klantid" value="${klantReservatie.key.id}" />
 								<c:param name="reservatieDatum" value="${klantReservatie.value}" />
 							</c:url>
-							<p><form action="" method="post">
+							<p>
+							<form action="" method="post">
 								${klantReservatie.key.voornaam}&nbsp;${klantReservatie.key.familienaam}&nbsp;op&nbsp;
 								<fmt:formatDate type="both" dateStyle="full" timeStyle="medium"
 									value='${klantReservatie.value}' />
@@ -47,11 +48,15 @@
 									type='hidden' name='reservatieDatum'
 									value='${klantReservatie.value}'> <input type="submit"
 									value="Verwijderen" />
-
-							</p></c:forEach>
-						<p class="gaterug">
-							<a href=<c:url value="/beheerreservaties.htm"/>>Ga terug...</a>
-						</p>
+							</form>
+							</p>
+						</c:forEach>
+						<nav id="top">
+							<ul>
+								<li><a href=<c:url value="/beheerreservaties.htm"/>>Ga
+										terug...</a></li>
+							</ul>
+						</nav>
 					</c:when>
 					<c:when test='${not empty removed || not empty fout}'>
 						<div class="fout">${removed}</div>
