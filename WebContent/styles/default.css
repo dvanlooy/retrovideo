@@ -115,6 +115,29 @@ div.fout {
 	display: none;
 }
 
+/**** 500 ****/
+#exception {
+	width: 800px;
+	margin: 0 auto;
+	padding: 0;
+}
+
+#exception_left {
+	float: left;
+	max-width: 578px;
+	margin: 0;
+	padding: 0;
+}
+
+#
+#exception_right {
+	float: left;
+	min-width: 222px;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
 /**** TOP ****/
 #top ul {
 	list-style-type: none;

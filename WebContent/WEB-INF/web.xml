@@ -4,6 +4,10 @@
     <param-name>copyright</param-name>
     <param-value>Dimitri Van Looy</param-value>
   </context-param>
+    <context-param>
+    <param-name>mail</param-name>
+    <param-value>contact@dummyaddress.org</param-value>
+  </context-param>
   <session-config>
     <session-timeout>20</session-timeout>
     <tracking-mode>COOKIE</tracking-mode>
@@ -13,7 +17,7 @@
     <location>/WEB-INF/JSP/404.jsp</location>
   </error-page>
   <error-page>
-    <exception-type>be.vdab.dao.DAOException</exception-type>
-    <location>/WEB-INF/JSP/daoexception.jsp</location>
+    <exception-type>be.vdab.exceptions.DAOException</exception-type>
+    <location>/WEB-INF/JSP/exception.jsp</location>
   </error-page>
 </web-app>
