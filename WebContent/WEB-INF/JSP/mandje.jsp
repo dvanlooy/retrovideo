@@ -21,7 +21,8 @@
 							<tr>
 								<th>Film</th>
 								<th>Prijs</th>
-								<th><input type="submit" value="Verwijderen" class="verwijderenknop"/></th>
+								<th><input type="submit" value="Verwijderen"
+									class="verwijderenknop" /></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,9 +39,10 @@
 				</form>
 			</c:when>
 			<c:otherwise>
-			<img alt="Leeg Mandje" src="<c:url value='/images/leegmandje.png'/>">
+				<img alt="Leeg Mandje" src="<c:url value='/images/leegmandje.png'/>">
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<vdab:footer />
 </body>
 </html>

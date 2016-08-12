@@ -46,6 +46,14 @@ thead tr th {
 	height: 3em;
 }
 
+footer {
+	padding: 1em;
+	color: white;
+	background-color: #c9c9c9;
+	clear: left;
+	text-align: center;
+}
+
 tr:nth-child(odd) {
 	background-color: #F2F2E4;
 }
@@ -63,7 +71,8 @@ tr:nth-child(even) {
 	font-family: Garamond, Times New Roman;
 	border: solid 1px white;
 }
-.gaterug{
+
+.gaterug {
 	width: 100px;
 	color: white;
 	background-color: #4CAF50;
@@ -77,6 +86,7 @@ tr:nth-child(even) {
 	width: 1100px;
 	margin: auto;
 	padding: 10px;
+	min-height: 600px;
 }
 
 .center {
@@ -91,6 +101,7 @@ span.fout {
 	background-color: #ffc6c6;
 	border: solid 1px red;
 }
+
 div.fout {
 	margin: 1em 0em;
 	padding: 0.25em;
@@ -174,23 +185,27 @@ div.fout {
 	padding: 7px 8px;
 }
 /**** FILMDETAIL ****/
-div.filmdetail{
+div.filmdetail {
 	width: 400px;
 }
+
 aside.filmdetail {
-    float: left;
-    margin: 0;
-    padding: 0;
+	float: left;
+	margin: 0;
+	padding: 0;
 }
+
 aside.filmdetail img {
-    width: 150px;
+	width: 150px;
 }
+
 section.filmdetail {
-    margin-left: 170px;
-    overflow: hidden;
+	margin-left: 170px;
+	overflow: hidden;
 }
+
 details.filmdetail {
-    margin-left: 170px;
-    padding: 1em;
-    overflow: hidden;
+	margin-left: 170px;
+	padding: 1em;
+	overflow: hidden;
 }

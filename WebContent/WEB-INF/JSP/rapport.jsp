@@ -14,20 +14,21 @@
 	<div class="wrapper">
 		<h1>Rapport</h1>
 		<c:choose>
-		<c:when test="${not empty succes}">
+			<c:when test="${not empty succes}">
 		${succes}
 		</c:when>
-		<c:otherwise>
-		<p>De Reservatie is niet volledig gelukt.</p>
-		<p>Volgende films zijn niet gereserveerd:</p>
-		<c:forEach var="reservatie" items="${reservaties}">
-		<c:if test="${reservatie.value == false}">
+			<c:otherwise>
+				<p>De Reservatie is niet volledig gelukt.</p>
+				<p>Volgende films zijn niet gereserveerd:</p>
+				<c:forEach var="reservatie" items="${reservaties}">
+					<c:if test="${reservatie.value == false}">
 		${reservatie.key.titel}
 		</c:if>
-		</c:forEach>
-		</c:otherwise>
+				</c:forEach>
+			</c:otherwise>
 		</c:choose>
 
 	</div>
+	<vdab:footer />
 </body>
 </html>

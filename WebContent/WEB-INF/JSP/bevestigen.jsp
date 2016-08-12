@@ -37,6 +37,6 @@
 		</c:choose>
 
 	</div>
-
+	<vdab:footer />
 </body>
 </html>

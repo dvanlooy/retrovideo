@@ -73,5 +73,6 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	<vdab:footer />
 </body>
 </html>

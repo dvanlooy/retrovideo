@@ -13,5 +13,6 @@
 	<div class="center">
 		<img src="<c:url value='/images/404-gentlemen.jpg'/>" alt="404-ERROR">
 	</div>
+	<vdab:footer/>
 </body>
 </html>

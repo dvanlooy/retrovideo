@@ -14,46 +14,47 @@
 	<div class="wrapper">
 		<h1>Klant</h1>
 		<c:choose>
-		<c:when test="${mandjeAanwezig}">
-		<form method="get" action="">
-			<label>Familienaam bevat:</label><br> <input type="text"
-				name="zoekopdracht" value="${param.zoekopdracht}" autofocus /> <input
-				type="submit" value="Zoeken" /><span class="fout">${fout}</span>
-		</form>
-		<br>
-		<c:if test='${not empty klanten}'>
-			<table>
-				<thead>
-					<tr>
-						<th>Naam</th>
-						<th>Straat - Huisnummer</th>
-						<th>Postcode</th>
-						<th>Gemeente</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="klant" items="${klanten}">
-						<c:url value="/bevestigen.htm" var="bevestigen">
-							<c:param name="id" value="${klant.id}" />
-						</c:url>
-						<tr>
-							<td><a href="${bevestigen}">${klant.voornaam}&nbsp;${klant.familienaam}</a></td>
-							<td>${klant.straatNummer}</td>
-							<td>${klant.postcode}</td>
-							<td>${klant.gemeente}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</c:if>
-		<c:if test='${not empty param and empty fout and empty klanten}'>
-			<div class='fout'>Geen klanten gevonden</div>
-		</c:if>
-		</c:when>
-		<c:otherwise>
-		<div class='fout'>Er moet eerst een mandje gevuld worden!</div>
-		</c:otherwise>
+			<c:when test="${mandjeAanwezig}">
+				<form method="get" action="">
+					<label>Familienaam bevat:</label><br> <input type="text"
+						name="zoekopdracht" value="${param.zoekopdracht}" autofocus /> <input
+						type="submit" value="Zoeken" /><span class="fout">${fout}</span>
+				</form>
+				<br>
+				<c:if test='${not empty klanten}'>
+					<table>
+						<thead>
+							<tr>
+								<th>Naam</th>
+								<th>Straat - Huisnummer</th>
+								<th>Postcode</th>
+								<th>Gemeente</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="klant" items="${klanten}">
+								<c:url value="/bevestigen.htm" var="bevestigen">
+									<c:param name="id" value="${klant.id}" />
+								</c:url>
+								<tr>
+									<td><a href="${bevestigen}">${klant.voornaam}&nbsp;${klant.familienaam}</a></td>
+									<td>${klant.straatNummer}</td>
+									<td>${klant.postcode}</td>
+									<td>${klant.gemeente}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</c:if>
+				<c:if test='${not empty param and empty fout and empty klanten}'>
+					<div class='fout'>Geen klanten gevonden</div>
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<div class='fout'>Er moet eerst een mandje gevuld worden!</div>
+			</c:otherwise>
 		</c:choose>
 	</div>
+	<vdab:footer />
 </body>
 </html>
