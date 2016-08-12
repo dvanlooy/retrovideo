@@ -63,10 +63,12 @@ public class RapportServlet extends HttpServlet {
 
 		// IF NO FALSE VALUES RESERVATION IS SUCCESFULL
 		request.getSession().setAttribute("succes", !reservaties.values().contains(false));
-	
+		request.getSession().setAttribute("reservaties", reservaties);
+		
+		//CLEAN UP SESSION
 		request.getSession().removeAttribute("mandje");
 		request.getSession().removeAttribute("klantid");
-		request.getSession().setAttribute("reservaties", reservaties);
+		
 
 		// GET ON WITH IT
 		response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath()));

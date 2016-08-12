@@ -2,7 +2,6 @@ package be.vdab.servlets;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,11 +47,9 @@ public class BeheerReservatiesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// FIND GERESERVEERDE FILMS
 		List<Reservatie> reservaties = reservatieDAO.findReservaties();
 		Set<Film> gereserveerdeFilms = new TreeSet<>();
-		Map<Klant, Date> klantenMetFilmGereserveerd = new HashMap<>();
-
-		// FIND GERESERVEERDE FILMS
 		if (request.getParameter("filmid") == null && request.getParameter("klantid") == null) {
 			for (Reservatie reservatie : reservaties) {
 				gereserveerdeFilms.add(filmDAO.findFilmById(reservatie.getFilmid()));
@@ -61,6 +58,7 @@ public class BeheerReservatiesServlet extends HttpServlet {
 		}
 
 		// FIND klanten WITH filmid IN RESERVATION
+		Map<Klant, Timestamp> klantenMetFilmGereserveerd = new HashMap<>();
 		if (request.getParameter("filmid") != null) {
 			try {
 				long filmid = Long.parseLong(request.getParameter("filmid"));
@@ -95,6 +93,7 @@ public class BeheerReservatiesServlet extends HttpServlet {
 					request.setAttribute("removed", reservatieDAO.removeReservation(filmid, klantid, reservatieDatum));
 
 				} catch (IllegalArgumentException e) {
+					request.setAttribute("removed", false);
 					request.setAttribute("fout", "Fout bij het verzamelen van de parameters");
 				}
 			}

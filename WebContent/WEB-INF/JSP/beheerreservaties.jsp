@@ -58,8 +58,8 @@
 							</ul>
 						</nav>
 					</c:when>
-					<c:when test='${not empty removed || not empty fout}'>
-						<div class="fout">${removed}</div>
+					<c:when test='${removed == false}'>
+						<div class="fout">Reservatie is niet verwijderd. Controleer voorraad.</div>
 						<div class="fout">${fout}</div>
 
 					</c:when>
