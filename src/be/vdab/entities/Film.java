@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import be.vdab.exceptions.RetroException;
 import be.vdab.util.Invoercontrole;
 
-public class Film {
+public class Film implements Comparable<Film>{
 	private long id;
 	private Genre genre;
 	private String titel;
@@ -127,11 +127,23 @@ public class Film {
 			return false;
 		return true;
 	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", genre=" + genre + ", titel=" + titel + ", voorraad=" + voorraad + ", gereserveerd="
 				+ gereserveerd + ", prijs=" + prijs + "]";
+	}
+
+	@Override
+	public int compareTo(Film arg0) {
+		if (arg0 == null) {
+			throw new NullPointerException();
+			}
+			else {
+			return this.titel.compareTo(arg0.getTitel());
+			}
 	}
 
 }

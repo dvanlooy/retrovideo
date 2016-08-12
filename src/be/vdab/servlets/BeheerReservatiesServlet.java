@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -49,7 +49,7 @@ public class BeheerReservatiesServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<Reservatie> reservaties = reservatieDAO.findReservaties();
-		Set<Film> gereserveerdeFilms = new HashSet<>();
+		Set<Film> gereserveerdeFilms = new TreeSet<>();
 		Map<Klant, Date> klantenMetFilmGereserveerd = new HashMap<>();
 
 		// FIND GERESERVEERDE FILMS
