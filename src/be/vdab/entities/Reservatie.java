@@ -6,6 +6,7 @@ import be.vdab.exceptions.RetroException;
 import be.vdab.util.Invoercontrole;
 
 public class Reservatie {
+	private static final long serialVersionUID = 1L;
 	private long klantid;
 	private long filmid;
 	private Timestamp reservatieDatum;

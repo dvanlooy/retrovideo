@@ -4,6 +4,7 @@ import be.vdab.exceptions.RetroException;
 import be.vdab.util.Invoercontrole;
 
 public class Klant {
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String familienaam;
 	private String voornaam;

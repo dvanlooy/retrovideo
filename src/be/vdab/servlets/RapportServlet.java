@@ -62,13 +62,8 @@ public class RapportServlet extends HttpServlet {
 		}
 
 		// IF NO FALSE VALUES RESERVATION IS SUCCESFULL
-		if (!reservaties.values().contains(false)) {
-			System.out.println("zou je niet mogen zien staan");
-			request.getSession().setAttribute("succes", "De Reservatie is OK");
-		}
-		else{
-			request.getSession().removeAttribute("succes");
-		}
+		request.getSession().setAttribute("succes", !reservaties.values().contains(false));
+	
 		request.getSession().removeAttribute("mandje");
 		request.getSession().removeAttribute("klantid");
 		request.getSession().setAttribute("reservaties", reservaties);

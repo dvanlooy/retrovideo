@@ -14,8 +14,8 @@
 	<div class="wrapper">
 		<h1>Rapport</h1>
 		<c:choose>
-			<c:when test="${not empty succes}">
-		${succes}
+			<c:when test="${succes == true}">
+		<p>De Reservatie is OK</p>
 		</c:when>
 			<c:otherwise>
 				<p>De Reservatie is niet volledig gelukt.</p>
