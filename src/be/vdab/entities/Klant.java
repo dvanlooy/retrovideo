@@ -144,6 +144,7 @@ public class Klant {
 		return true;
 	}
 
+	//TOSTRING
 	@Override
 	public String toString() {
 		return "Klant [id=" + id + ", familienaam=" + familienaam + ", voornaam=" + voornaam + ", straatNummer="

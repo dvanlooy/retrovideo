@@ -36,11 +36,10 @@ public class FilmDAO extends AbstractDAO {
 	/**
 	 * Gets all films from a specified Genre from database
 	 * 
-	 * @param id
-	 *            (genreid)
-	 * @return List with Film objects
+	 * @param id 
+     * @return List with Film objects
 	 */
-	public List<Film> findFilmsByGenre(long id) {
+	public List<Film> findFilmsByGenre(long id) throws DAOException  {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_FILMS)) {
 			List<Film> films = new ArrayList<>();
@@ -64,7 +63,7 @@ public class FilmDAO extends AbstractDAO {
 	 * @param id
 	 * @return Film Object
 	 */
-	public Film findFilmById(long id) {
+	public Film findFilmById(long id)  throws DAOException {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_ONE_FILM)) {
 			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);

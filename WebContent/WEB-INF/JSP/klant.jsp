@@ -51,7 +51,7 @@
 				</c:if>
 			</c:when>
 			<c:otherwise>
-				<div class='fout'>Er moet eerst een mandje gevuld worden!</div>
+				<div class='melding'>Er moet eerst een mandje gevuld worden!</div>
 			</c:otherwise>
 		</c:choose>
 	</div>

@@ -111,6 +111,15 @@ div.fout {
 	border: solid 1px red;
 }
 
+div.melding {
+	margin: 1em 0em;
+	padding: 0.25em;
+	text-align: center;
+	color: #008080;
+	background-color: #d9f0d5;
+	border: solid 1px #008080;
+}
+
 .fout:EMPTY {
 	display: none;
 }

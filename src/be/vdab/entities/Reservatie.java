@@ -81,6 +81,7 @@ public class Reservatie {
 		return true;
 	}
 
+	//TOSTRING
 	@Override
 	public String toString() {
 		return "Reservatie [klantid=" + klantid + ", filmid=" + filmid + ", reservatieDatum=" + reservatieDatum + "]";

@@ -34,9 +34,9 @@ public class ReservatieDAO extends AbstractDAO {
 	 * 
 	 * @param filmid
 	 * @param klantid
-	 * @return true when update succesfull
+	 * @return true when update successful
 	 */
-	public boolean makeReservation(long filmid, long klantid) {
+	public boolean makeReservation(long filmid, long klantid)  throws DAOException  {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement_1 = connection.prepareStatement(FilmDAO.UPDATE_FILM_GERESERVEERD);
 				PreparedStatement statement_2 = connection.prepareStatement(INSERT_RESERVATIE)) {
@@ -69,9 +69,9 @@ public class ReservatieDAO extends AbstractDAO {
 	 * @param filmid
 	 * @param klantid
 	 * @param reservatieDatum
-	 * @return
+	 * @return true when reservation removed
 	 */
-	public boolean removeReservation(long filmid, long klantid, Timestamp reservatieDatum) {
+	public boolean removeReservation(long filmid, long klantid, Timestamp reservatieDatum)  throws DAOException  {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement_1 = connection.prepareStatement(FilmDAO.UPDATE_FILM_VERWIJDER_RESERVATIE);
 				PreparedStatement statement_2 = connection.prepareStatement(DELETE_RESERVATIE)) {
@@ -99,15 +99,13 @@ public class ReservatieDAO extends AbstractDAO {
 			throw new DAOException(ex);
 		}
 	}
-	
-	
 
 	/**
 	 * Gets all reservaties from database
 	 * 
 	 * @return List with Reservatie objects
 	 */
-	public List<Reservatie> findReservaties() {
+	public List<Reservatie> findReservaties()  throws DAOException {
 		try (Connection connection = dataSource.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_RESERVATIES)) {

@@ -27,7 +27,7 @@ public class KlantDAO extends AbstractDAO {
 	 * @param zoekopdracht
 	 * @return List with Klant objects
 	 */
-	public List<Klant> findKlantenByFamilienaam(String zoekopdracht){
+	public List<Klant> findKlantenByFamilienaam(String zoekopdracht)  throws DAOException {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_KLANTEN_FAMILIENAAM)) {
 			
@@ -53,7 +53,7 @@ public class KlantDAO extends AbstractDAO {
 	 * @param id
 	 * @return Klant Object
 	 */
-	public Klant findKlantById(long id) {
+	public Klant findKlantById(long id)  throws DAOException  {
 		try (Connection connection = dataSource.getConnection();
 				PreparedStatement statement = connection.prepareStatement(SELECT_KLANT)) {
 			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);

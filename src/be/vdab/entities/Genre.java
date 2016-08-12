@@ -4,6 +4,7 @@ import be.vdab.exceptions.RetroException;
 import be.vdab.util.Invoercontrole;
 
 public class Genre {
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String naam;
 
@@ -70,6 +71,7 @@ public class Genre {
 		return true;
 	}
 
+	//TOSTRING
 	@Override
 	public String toString() {
 		return "Genre [id=" + id + ", naam=" + naam + "]";

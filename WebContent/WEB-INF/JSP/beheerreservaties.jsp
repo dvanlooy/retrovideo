@@ -64,7 +64,7 @@
 
 					</c:when>
 					<c:otherwise>
-						Geen reservaties te beheren!
+						<div class='melding'>Geen reservaties te beheren!</div>
 					</c:otherwise>
 				</c:choose>
 			</c:when>

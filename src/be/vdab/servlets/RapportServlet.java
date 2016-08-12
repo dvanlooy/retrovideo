@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import be.vdab.dao.FilmDAO;
 import be.vdab.dao.ReservatieDAO;
 import be.vdab.entities.Film;
+import be.vdab.entities.Klant;
 
 @WebServlet("/rapport.htm")
 public class RapportServlet extends HttpServlet {
@@ -44,30 +45,34 @@ public class RapportServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		// RETRIEVE mandje WITH ID's FROM SESSION
 		@SuppressWarnings("unchecked")
 		Set<Long> mandje = (Set<Long>) request.getSession().getAttribute("mandje");
-		// RETRIEVE klantid FROM SESSION
-		long klantid = (Long) request.getSession().getAttribute("klantid");
+
+		// RETRIEVE klant FROM SESSION
+		Klant klant = (Klant) request.getSession().getAttribute("klant");
+		long klantid = klant.getId();
 
 		// PUT RESERVATIONS IN DATABASE
 		Map<Film, Boolean> reservaties = new HashMap<>();
 		for (long filmid : mandje) {
-			if (reservatieDAO.makeReservation(filmid, klantid)) {
-				reservaties.put(filmDAO.findFilmById(filmid), true);
-			} else {
-				reservaties.put(filmDAO.findFilmById(filmid), false);
-			}
+			reservaties.put(filmDAO.findFilmById(filmid), reservatieDAO.makeReservation(filmid, klantid));
+			System.out.println(reservaties.get(filmDAO.findFilmById(filmid)));
 		}
-		
-		//IF NO FALSE VALUES RESERVATION IS SUCCESFULL
+
+		// IF NO FALSE VALUES RESERVATION IS SUCCESFULL
 		if (!reservaties.values().contains(false)) {
+			System.out.println("zou je niet mogen zien staan");
 			request.getSession().setAttribute("succes", "De Reservatie is OK");
+		}
+		else{
+			request.getSession().removeAttribute("succes");
 		}
 		request.getSession().removeAttribute("mandje");
 		request.getSession().removeAttribute("klantid");
 		request.getSession().setAttribute("reservaties", reservaties);
-		
+
 		// GET ON WITH IT
 		response.sendRedirect(String.format(REDIRECT_URL, request.getContextPath()));
 	}

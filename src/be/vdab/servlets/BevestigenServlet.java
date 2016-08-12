@@ -13,46 +13,49 @@ import javax.sql.DataSource;
 
 import be.vdab.dao.KlantDAO;
 
-
 @WebServlet("/bevestigen.htm")
 public class BevestigenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final transient KlantDAO klantDAO = new KlantDAO();
 	private static final String VIEW = "/WEB-INF/JSP/bevestigen.jsp";
-	
+
 	@Resource(name = KlantDAO.JNDI_NAME)
 	void setDataSource(DataSource dataSource) {
 		klantDAO.setDataSource(dataSource);
 	}
-	
-    public BevestigenServlet() {
-        super();
 
-    }
+	public BevestigenServlet() {
+		super();
 
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		// RETRIEVE mandje WITH ID's FROM SESSION
 		@SuppressWarnings("unchecked")
 		Set<Long> mandje = (Set<Long>) request.getSession().getAttribute("mandje");
-		// COUNT ITEMS IN MANDJE
+
+		// COUNT ITEMS IN mandje & GET klant
 		if (mandje != null) {
 			request.setAttribute("aantal", mandje.size());
-		}else{
-			request.setAttribute("leeg", "Er is geen winkelmandje");
+			try {
+				long klantid = Long.parseLong(request.getParameter("id"));
+				request.getSession().setAttribute("klant", klantDAO.findKlantById(klantid));
+			} catch (NumberFormatException e) {
+				request.setAttribute("fout", "klantid is niet correct");
+			}
+
+		} else {
+			request.setAttribute("fout", "Er is geen winkelmandje");
 		}
-		// GET klant FROM PARAMETER
-		long klantid = Long.parseLong(request.getParameter("id"));
-		request.setAttribute("klant", klantDAO.findKlantById(klantid));
-		request.getSession().setAttribute("klantid", klantid);
-		
-		
+
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 
 }

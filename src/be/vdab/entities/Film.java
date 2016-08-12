@@ -6,6 +6,7 @@ import be.vdab.exceptions.RetroException;
 import be.vdab.util.Invoercontrole;
 
 public class Film implements Comparable<Film>{
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private Genre genre;
 	private String titel;
@@ -105,7 +106,6 @@ public class Film implements Comparable<Film>{
 		result = prime * result + ((titel == null) ? 0 : titel.hashCode());
 		return result;
 	}
-
 	@Override
 	/**
 	 * Film Objects are equal when both id and titel are the same
@@ -129,7 +129,7 @@ public class Film implements Comparable<Film>{
 	}
 	
 	
-
+	//TOSTRING
 	@Override
 	public String toString() {
 		return "Film [id=" + id + ", genre=" + genre + ", titel=" + titel + ", voorraad=" + voorraad + ", gereserveerd="

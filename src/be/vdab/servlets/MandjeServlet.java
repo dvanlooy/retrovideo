@@ -37,11 +37,11 @@ public class MandjeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// RETRIEVE mandje WITH ID's FROM SESSION
+		// RETRIEVE mandje FROM SESSION
 		@SuppressWarnings("unchecked")
 		Set<Long> mandje = (Set<Long>) request.getSession().getAttribute("mandje");
 
-		// CREATE LIST WITH FILM OBJECTS
+		// CREATE LIST WITH Film OBJECTS
 		if (mandje != null) {
 			List<Film> filmsInMandje = new ArrayList<>();
 			for (long id : mandje) {
@@ -57,7 +57,7 @@ public class MandjeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// RETRIEVE mandje WITH ID's FROM SESSION
+		// RETRIEVE mandje FROM SESSION
 		@SuppressWarnings("unchecked")
 		Set<Long> mandje = (Set<Long>) request.getSession().getAttribute("mandje");
 
@@ -70,7 +70,11 @@ public class MandjeServlet extends HttpServlet {
 		if (request.getParameter("add") != null) {
 			String id = request.getParameter("add");
 			if (!mandje.contains(id)) {
-				mandje.add(Long.parseLong(id));
+				try {
+					mandje.add(Long.parseLong(id));
+				} catch (NumberFormatException e) {
+					//IF NO LONG DO NOTHING (=HACKERSTUFF)
+				}
 			}
 			request.getSession().setAttribute("mandje", mandje);
 		}
@@ -79,7 +83,11 @@ public class MandjeServlet extends HttpServlet {
 		// mandje, REMOVE SESSION ATTRIBUTE mandje
 		if (request.getParameterValues("remove") != null) {
 			for (String id : request.getParameterValues("remove")) {
-				mandje.remove(Long.parseLong(id));
+				try {
+					mandje.remove(Long.parseLong(id));
+				} catch (NumberFormatException e) {
+					//IF NO LONG DO NOTHING (=HACKERSTUFF)
+				}
 			}
 			if (mandje.isEmpty()) {
 				request.getSession().removeAttribute("mandje");

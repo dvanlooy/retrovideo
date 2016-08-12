@@ -23,7 +23,7 @@ public class GenreDAO extends AbstractDAO {
 	 * 
 	 * @return List with Genre objects
 	 */
-	public List<Genre> findGenres() {
+	public List<Genre> findGenres() throws DAOException  {
 		try (Connection connection = dataSource.getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery(SELECT_GENRES)) {

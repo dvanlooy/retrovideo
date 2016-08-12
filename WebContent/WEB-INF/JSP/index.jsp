@@ -37,7 +37,7 @@
 		<c:when test="${empty films && not empty param.id}">
 			<div class='fout'>Geen films gevonden</div>
 		</c:when>
-		<c:otherwise>
+		<c:when test="${not empty films && not empty param.id}">
 			<nav>
 				<ul>
 					<c:forEach var='film' items='${films}'>
@@ -59,6 +59,9 @@
 					</c:forEach>
 				</ul>
 			</nav>
+		</c:when>
+		<c:otherwise>
+		<div class='melding'>${melding}</div>
 		</c:otherwise>
 	</c:choose>
 </div>

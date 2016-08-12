@@ -14,7 +14,7 @@
 	<div class="wrapper">
 		<h1>Bevestigen</h1>
 		<c:choose>
-			<c:when test="${empty leeg}">
+			<c:when test="${empty fout}">
 				<c:choose>
 					<c:when test="${aantal > 1}">
 						<c:set var="film_woord" value="films" />
@@ -31,8 +31,8 @@
 			</c:when>
 		</c:choose>
 		<c:choose>
-			<c:when test="${not empty leeg}">
-				<p>${leeg}</p>
+			<c:when test="${not empty fout}">
+				<div class="fout">${fout}</div>
 			</c:when>
 		</c:choose>
 

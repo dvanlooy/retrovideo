@@ -28,6 +28,7 @@ public class IndexServlet extends HttpServlet {
 		genreDAO.setDataSource(dataSource);
 		filmDAO.setDataSource(dataSource);
 	}
+	
 
 	public IndexServlet() {
 		super();
@@ -49,7 +50,9 @@ public class IndexServlet extends HttpServlet {
 		} catch (NumberFormatException ex) {
 			request.setAttribute("fout", "Genre id niet correct");
 		}
-		}		
+		}	else {
+			request.setAttribute("melding", "Selecteer een genre");
+		}	
 		
 		
 		//GET ON WITH IT

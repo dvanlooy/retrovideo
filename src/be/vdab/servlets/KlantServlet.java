@@ -30,6 +30,12 @@ public class KlantServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		// CHECK FOR mandje IN SESSION
+		if (request.getSession().getAttribute("mandje") != null)
+			request.setAttribute("mandjeAanwezig", true);
+
+		// SEARCH FOR klanten WITH zoekopdracht
 		if (request.getParameter("zoekopdracht") != null) {
 			if (!request.getParameter("zoekopdracht").isEmpty()) {
 				request.setAttribute("klanten",
@@ -38,7 +44,8 @@ public class KlantServlet extends HttpServlet {
 				request.setAttribute("fout", "tik minstens één letter");
 			}
 		}
-		if (request.getSession().getAttribute("mandje") != null) request.setAttribute("mandjeAanwezig", true);
+
+		// GET ON WITH IT
 		request.getRequestDispatcher(VIEW).forward(request, response);
 	}
 
