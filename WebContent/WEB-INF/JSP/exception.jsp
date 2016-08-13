@@ -14,7 +14,7 @@
 		<div id="exception_left">
 			<h2>Something went terribly wrong...</h2>
 			<p>You must be thinking: "Oops! I did it again!". But alack and alas... we take all the blame.</p>
-			<p>A team of highly trained monkeys as been commandeered to deal with this troublesome situation.</p>
+			<p>A team of highly trained monkeys has been commandeered to deal with this troublesome situation.</p>
 			<p>Our Chief Executive Monkey wishes to express his sincerest apologies to you.</p>
 			<p> 
 			Please send an email to ${mail} with a short series of events that triggered this unfortunate error message.
