@@ -58,11 +58,6 @@
 							</ul>
 						</nav>
 					</c:when>
-					<c:when test='${removed == false}'>
-						<div class="fout">Reservatie is niet verwijderd. Controleer voorraad.</div>
-						<div class="fout">${fout}</div>
-
-					</c:when>
 					<c:otherwise>
 						<div class='melding'>Geen reservaties te beheren!</div>
 					</c:otherwise>
