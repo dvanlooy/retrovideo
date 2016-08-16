@@ -60,6 +60,10 @@ public class ReservatieDAO extends AbstractDAO {
 		}
 	}
 
+	/*
+	 * DEZE METHOD VALT BUITEN DE SCOPE VAN DE OPDRACHT
+	 * MAAR WERD AANGEMAAKT OM EENVOUDIG DE RESERVATIES TE VERWIJDEN
+	 */
 	/**
 	 * Gets all reservaties from database
 	 * 
@@ -80,6 +84,10 @@ public class ReservatieDAO extends AbstractDAO {
 		}
 	}
 
+	/*
+	 * DEZE METHOD VALT BUITEN DE SCOPE VAN DE OPDRACHT
+	 * MAAR WERD AANGEMAAKT OM EENVOUDIG DE RESERVATIES TE VERWIJDEN
+	 */
 	/**
 	 * Builds a Reservatie object based on row data from ResultSet
 	 * 
