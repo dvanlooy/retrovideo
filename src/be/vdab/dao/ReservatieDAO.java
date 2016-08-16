@@ -101,7 +101,10 @@ public class ReservatieDAO extends AbstractDAO {
 		return reservatie;
 	}
 
-	// this one is out of scope of the test but added for easy reviewing
+	/*
+	 * DEZE METHOD VALT BUITEN DE SCOPE VAN DE OPDRACHT
+	 * MAAR WERD AANGEMAAKT OM EENVOUDIG DE RESERVATIES TE VERWIJDEN
+	 */
 	/**
 	 * Removes a reservation and adjust gereserveerd in film
 	 * 
